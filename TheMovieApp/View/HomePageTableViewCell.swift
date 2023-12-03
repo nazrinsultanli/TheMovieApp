@@ -80,7 +80,7 @@ class HomePageTableViewCell: UITableViewCell {
         priceLabel.text = item.originalTitle
         
         
-        if let thumbnailUrl = URL(string: item.backdropPath ?? "") {
+        if let thumbnailUrl = URL(string: "https://image.tmdb.org/t/p/original/"+item.backdropPath!) {
                 // Load image from URL using URLSession
                 URLSession.shared.dataTask(with: thumbnailUrl) { (data, _, error) in
                     if let error = error {
