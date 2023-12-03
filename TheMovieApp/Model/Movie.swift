@@ -7,7 +7,8 @@
 
 import Foundation
 
-// MARK: - Movie
+// MARK: - Movie\
+
 struct Movie: Codable {
     let page: Int?
     let results: [Result]?
@@ -49,3 +50,4 @@ struct Result: Codable {
         case voteCount = "vote_count"
     }
 }
+

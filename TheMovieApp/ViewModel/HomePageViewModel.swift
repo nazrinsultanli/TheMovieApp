@@ -8,18 +8,19 @@
 import Foundation
 
 class HomePageViewModel {
-    var popularMovies = [Movie]()
+    var popularMovies = [Result]()
     var success: (() -> Void)?
     var error: ((String) -> Void)?
     
     func getPopularMovie() {
-        NetworkManager.request(model: [Movie].self,
+        NetworkManager.request(model: Movie.self,
                                url: Endpoints.popular.rawValue) {data, errorMessage in
             print(Endpoints.popular.rawValue)
             if let errorMessage {
                 self.error?(errorMessage)
             } else if let data {
-                self.popularMovies = data
+                guard let results = data.results else  {return}
+                self.popularMovies = results
                 self.success?()
             }
  
