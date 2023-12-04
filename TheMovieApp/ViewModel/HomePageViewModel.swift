@@ -8,10 +8,34 @@
 import Foundation
 
 class HomePageViewModel {
-    var popularMovies = [Result]()
-    var success: (() -> Void)?
+   // static let shared = HomePageViewModel()
+    
+//    var success: (() -> Void)?
     var error: ((String) -> Void)?
     
+    
+    var movieResults: [Result] = [Result]()
+    func getSpecificMovies(endPoint: Endpoints, completion: @escaping ([Result]?) -> Void) {
+        NetworkManager.request(
+            model: Movie.self,
+            url: endPoint.rawValue
+        ) {[weak self] data, errorMessage in
+           
+            if let errorMessage {
+                self?.error?(errorMessage)
+            } else if let data {
+                guard let results = data.results else  {return}
+                self?.movieResults = results
+                completion(self?.movieResults)
+//                self.movieResults = results
+//                self.success?()
+            }
+ 
+        }
+    }
+    
+    /*
+    var popularMovies = [Result]()
     func getPopularMovie() {
         NetworkManager.request(model: Movie.self,
                                url: Endpoints.popular.rawValue) {data, errorMessage in
@@ -26,6 +50,7 @@ class HomePageViewModel {
  
         }
     }
+     */
 }
 
 

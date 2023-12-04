@@ -9,7 +9,6 @@ import UIKit
 
 class HomePageViewController: UIViewController {
     var viewModel = HomePageViewModel()
-    
     private lazy var tableView: UITableView = {
         let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false
@@ -23,16 +22,19 @@ class HomePageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Movie"
-        view.backgroundColor = .red
         
         setUpTable()
-        viewModel.getPopularMovie()
-        viewModel.success = { [weak self] in
+
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.getSpecificMovies(endPoint: Endpoints.popular) { [weak self] _ in
+            
             self?.tableView.reloadData()
         }
     }
     
-    private func setUpTable() {
+     func setUpTable() {
         view.addSubview(tableView)
         tableView.frame = view.bounds
         
@@ -47,17 +49,43 @@ class HomePageViewController: UIViewController {
 
 
 extension HomePageViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.popularMovies.count
+    
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        3
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch (section) {
+        case 0:
+            return "popular"
+        case 1:
+            return "New Products"
+        case 2:
+            return "Discounted Products"
+        default:
+            return "-----"
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        1
+    }
+ 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: HomePageTableViewCell.reuseID, for: indexPath) as! HomePageTableViewCell
-        cell.configure(item: viewModel.popularMovies[indexPath.row])
-        return cell
+        switch (indexPath.section) {
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: HomePageTableViewCell.reuseID, for: indexPath) as! HomePageTableViewCell
+            cell.movies =  viewModel.movieResults
+            return cell
+        default:
+            return UITableViewCell()
+        }
+        
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        100
+        150
     }
 }
