@@ -14,25 +14,91 @@ class HomePageViewModel {
     var error: ((String) -> Void)?
     
     
-    var movieResults: [Result] = [Result]()
-    func getSpecificMovies(endPoint: Endpoints, completion: @escaping ([Result]?) -> Void) {
+    var popularMovies = [Result]()
+    func getPopularMovies(completion: @escaping ([Result]?) -> Void) {
         NetworkManager.request(
             model: Movie.self,
-            url: endPoint.rawValue
+            url: Endpoints.popular.rawValue
         ) {[weak self] data, errorMessage in
            
             if let errorMessage {
                 self?.error?(errorMessage)
             } else if let data {
                 guard let results = data.results else  {return}
-                self?.movieResults = results
-                completion(self?.movieResults)
+                self?.popularMovies = results
+                completion(self?.popularMovies)
 //                self.movieResults = results
 //                self.success?()
             }
  
         }
     }
+    
+    
+    var nowPlayingMovies = [Result]()
+    func getNowPlayingMovies(completion: @escaping ([Result]?) -> Void) {
+        NetworkManager.request(
+            model: Movie.self,
+            url: Endpoints.playing.rawValue
+        ) {[weak self] data, errorMessage in
+           
+            if let errorMessage {
+                self?.error?(errorMessage)
+            } else if let data {
+                guard let results = data.results else  {return}
+                self?.nowPlayingMovies = results
+                completion(self?.nowPlayingMovies)
+//                self.movieResults = results
+//                self.success?()
+            }
+ 
+        }
+    }
+    
+    
+    var topRatedMovies = [Result]()
+    func getTopRatedMovies(completion: @escaping ([Result]?) -> Void) {
+        NetworkManager.request(
+            model: Movie.self,
+            url: Endpoints.topRated.rawValue
+        ) {[weak self] data, errorMessage in
+           
+            if let errorMessage {
+                self?.error?(errorMessage)
+            } else if let data {
+                guard let results = data.results else  {return}
+                self?.topRatedMovies = results
+                completion(self?.topRatedMovies)
+//                self.movieResults = results
+//                self.success?()
+            }
+ 
+        }
+    }
+    
+    var upComingMovies = [Result]()
+    func getUpComingMovies(completion: @escaping ([Result]?) -> Void) {
+        NetworkManager.request(
+            model: Movie.self,
+            url: Endpoints.upComing.rawValue
+        ) {[weak self] data, errorMessage in
+           
+            if let errorMessage {
+                self?.error?(errorMessage)
+            } else if let data {
+                guard let results = data.results else  {return}
+                self?.upComingMovies = results
+                completion(self?.upComingMovies)
+//                self.movieResults = results
+//                self.success?()
+            }
+ 
+        }
+    }
+
+    
+    
+    
     
     /*
     var popularMovies = [Result]()

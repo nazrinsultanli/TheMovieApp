@@ -20,6 +20,7 @@
 		105F05862B1B809E00A78132 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105F05852B1B809E00A78132 /* HomePageViewController.swift */; };
 		10A4DD7B2B1E30940009254C /* HomePageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A4DD7A2B1E30940009254C /* HomePageCollectionViewCell.swift */; };
 		10DC15972B1CF23A0018A402 /* HomePageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10DC15962B1CF23A0018A402 /* HomePageTableViewCell.swift */; };
+		10FA6EBC2B1FA7930060F108 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10FA6EBB2B1FA7930060F108 /* SectionHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		105F05852B1B809E00A78132 /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		10A4DD7A2B1E30940009254C /* HomePageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageCollectionViewCell.swift; sourceTree = "<group>"; };
 		10DC15962B1CF23A0018A402 /* HomePageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageTableViewCell.swift; sourceTree = "<group>"; };
+		10FA6EBB2B1FA7930060F108 /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 			children = (
 				10DC15962B1CF23A0018A402 /* HomePageTableViewCell.swift */,
 				10A4DD7A2B1E30940009254C /* HomePageCollectionViewCell.swift */,
+				10FA6EBB2B1FA7930060F108 /* SectionHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -203,6 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10FA6EBC2B1FA7930060F108 /* SectionHeaderView.swift in Sources */,
 				1008F1002B1B30920049A3A8 /* NetworkManager.swift in Sources */,
 				10DC15972B1CF23A0018A402 /* HomePageTableViewCell.swift in Sources */,
 				1008F0DF2B1B287B0049A3A8 /* AppDelegate.swift in Sources */,
