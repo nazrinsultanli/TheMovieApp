@@ -7,116 +7,39 @@
 
 import Foundation
 
-class HomePageViewModel {
-   // static let shared = HomePageViewModel()
-    
-//    var success: (() -> Void)?
-    var error: ((String) -> Void)?
-    
-    
-    var popularMovies = [Result]()
-    func getPopularMovies(completion: @escaping ([Result]?) -> Void) {
-        NetworkManager.request(
-            model: Movie.self,
-            url: Endpoints.popular.rawValue
-        ) {[weak self] data, errorMessage in
-           
-            if let errorMessage {
-                self?.error?(errorMessage)
-            } else if let data {
-                guard let results = data.results else  {return}
-                self?.popularMovies = results
-                completion(self?.popularMovies)
-//                self.movieResults = results
-//                self.success?()
-            }
- 
-        }
-    }
-    
-    
-    var nowPlayingMovies = [Result]()
-    func getNowPlayingMovies(completion: @escaping ([Result]?) -> Void) {
-        NetworkManager.request(
-            model: Movie.self,
-            url: Endpoints.playing.rawValue
-        ) {[weak self] data, errorMessage in
-           
-            if let errorMessage {
-                self?.error?(errorMessage)
-            } else if let data {
-                guard let results = data.results else  {return}
-                self?.nowPlayingMovies = results
-                completion(self?.nowPlayingMovies)
-//                self.movieResults = results
-//                self.success?()
-            }
- 
-        }
-    }
-    
-    
-    var topRatedMovies = [Result]()
-    func getTopRatedMovies(completion: @escaping ([Result]?) -> Void) {
-        NetworkManager.request(
-            model: Movie.self,
-            url: Endpoints.topRated.rawValue
-        ) {[weak self] data, errorMessage in
-           
-            if let errorMessage {
-                self?.error?(errorMessage)
-            } else if let data {
-                guard let results = data.results else  {return}
-                self?.topRatedMovies = results
-                completion(self?.topRatedMovies)
-//                self.movieResults = results
-//                self.success?()
-            }
- 
-        }
-    }
-    
-    var upComingMovies = [Result]()
-    func getUpComingMovies(completion: @escaping ([Result]?) -> Void) {
-        NetworkManager.request(
-            model: Movie.self,
-            url: Endpoints.upComing.rawValue
-        ) {[weak self] data, errorMessage in
-           
-            if let errorMessage {
-                self?.error?(errorMessage)
-            } else if let data {
-                guard let results = data.results else  {return}
-                self?.upComingMovies = results
-                completion(self?.upComingMovies)
-//                self.movieResults = results
-//                self.success?()
-            }
- 
-        }
-    }
+struct homeModel {
+    let title: String
+    let result: [Result]
+}
 
-    
-    
-    
-    
-    /*
-    var popularMovies = [Result]()
-    func getPopularMovie() {
-        NetworkManager.request(model: Movie.self,
-                               url: Endpoints.popular.rawValue) {data, errorMessage in
-            print(Endpoints.popular.rawValue)
+class HomePageViewModel {
+
+    var items = [homeModel]()
+    var success: (() -> Void)?
+    var error: ((String) -> Void)?
+        
+    func getItems() {
+        getMovies(endpoint: Endpoints.playing, title: "Now Playing")
+        getMovies(endpoint: Endpoints.popular, title: "Popular")
+        getMovies(endpoint: Endpoints.topRated, title: "Top Rated")
+        getMovies(endpoint: Endpoints.upComing, title: "Up Coming")
+    }
+    func getMovies(endpoint: Endpoints, title: String) {
+        NetworkManager.request(
+            model: Movie.self,
+            url: endpoint.rawValue
+        ) {[weak self] data, errorMessage in
+           
             if let errorMessage {
-                self.error?(errorMessage)
+                self?.error?(errorMessage)
             } else if let data {
                 guard let results = data.results else  {return}
-                self.popularMovies = results
-                self.success?()
+                self?.items.append(.init(title: title, result: results))
+                self?.success?()
             }
  
         }
     }
-     */
 }
 
 
