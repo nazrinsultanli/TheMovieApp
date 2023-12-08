@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomePageTableViewCell: UITableViewCell {
+class HomePageCollectionViewCell: UICollectionViewCell {
     
     static let reuseID = "HomePageTableViewCell"
     var movies = [Result]()
@@ -41,18 +41,19 @@ class HomePageTableViewCell: UITableViewCell {
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.delegate = self
         collection.dataSource = self
-        collection.backgroundColor = .red
+        
         
         collection.register(TopImageButtonLabelCell.self, forCellWithReuseIdentifier: TopImageButtonLabelCell.reuseID)
         return collection
     }()
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setUpCell()
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("Init(coder:) has not been implemented")
-    }
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setUpCell()
     }
     
     func configure(title: String, movies: [Result]) {
@@ -64,29 +65,28 @@ class HomePageTableViewCell: UITableViewCell {
         let stack = UIStackView()
         stack.addArrangedSubview(titleLabel)
         stack.addArrangedSubview(seeAllButton)
-        stack.backgroundColor = .green
         stack.axis = .horizontal
        // stack.spacing = 4
         stack.translatesAutoresizingMaskIntoConstraints = false
         
-        contentView.addSubview(stack)
-        contentView.addSubview(collectionView)
+        addSubview(stack)
+        addSubview(collectionView)
         
         NSLayoutConstraint.activate([
-            stack.topAnchor.constraint(equalTo: contentView.topAnchor),
-            stack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 20),
-            stack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -20),
+            stack.topAnchor.constraint(equalTo: topAnchor),
+            stack.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 20),
+            stack.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -20),
             seeAllButton.trailingAnchor.constraint(equalTo: stack.trailingAnchor),
 
             collectionView.topAnchor.constraint(equalTo: stack.bottomAnchor, constant: 16),
-            collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
         ])
     }
 }
 
-extension HomePageTableViewCell:  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension HomePageCollectionViewCell:  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         movies.count
     }

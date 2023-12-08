@@ -22,7 +22,7 @@ struct Movie: Codable {
 }
 
 // MARK: - Result
-struct Result: Codable {
+struct Result: Codable, TopImageButtonLabelCellProtocol {
     let adult: Bool?
     let backdropPath: String?
     let genreIDS: [Int]?
@@ -35,6 +35,13 @@ struct Result: Codable {
     let voteAverage: Double?
     let voteCount: Int?
 
+    var titleString: String {
+        originalTitle ?? ""
+    }
+    
+    var imageString: String {
+        backdropPath ?? ""
+    }
     enum CodingKeys: String, CodingKey {
         case adult
         case backdropPath = "backdrop_path"

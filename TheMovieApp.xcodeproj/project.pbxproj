@@ -18,6 +18,10 @@
 		1008F1082B1B367E0049A3A8 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1008F1072B1B367E0049A3A8 /* Endpoints.swift */; };
 		105F05842B1B7E8B00A78132 /* HomePageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105F05832B1B7E8B00A78132 /* HomePageViewModel.swift */; };
 		105F05862B1B809E00A78132 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105F05852B1B809E00A78132 /* HomePageViewController.swift */; };
+		1066BA812B2369E20004F391 /* PeoplePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1066BA802B2369E20004F391 /* PeoplePageViewController.swift */; };
+		1066BA832B236A010004F391 /* PeoplePageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1066BA822B236A010004F391 /* PeoplePageViewModel.swift */; };
+		1066BA852B236B660004F391 /* People.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1066BA842B236B660004F391 /* People.swift */; };
+		1066BA892B2375560004F391 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1066BA882B2375560004F391 /* TabViewController.swift */; };
 		107387A32B2260A40097D66D /* extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107387A22B2260A40097D66D /* extension.swift */; };
 		107387A52B2262050097D66D /* NetworkHelperLinker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107387A42B2262050097D66D /* NetworkHelperLinker.swift */; };
 		10A4DD7B2B1E30940009254C /* TopImageButtonLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A4DD7A2B1E30940009254C /* TopImageButtonLabelCell.swift */; };
@@ -38,6 +42,10 @@
 		1008F1072B1B367E0049A3A8 /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
 		105F05832B1B7E8B00A78132 /* HomePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewModel.swift; sourceTree = "<group>"; };
 		105F05852B1B809E00A78132 /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
+		1066BA802B2369E20004F391 /* PeoplePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeoplePageViewController.swift; sourceTree = "<group>"; };
+		1066BA822B236A010004F391 /* PeoplePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeoplePageViewModel.swift; sourceTree = "<group>"; };
+		1066BA842B236B660004F391 /* People.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = People.swift; sourceTree = "<group>"; };
+		1066BA882B2375560004F391 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		107387A22B2260A40097D66D /* extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extension.swift; sourceTree = "<group>"; };
 		107387A42B2262050097D66D /* NetworkHelperLinker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelperLinker.swift; sourceTree = "<group>"; };
 		10A4DD7A2B1E30940009254C /* TopImageButtonLabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopImageButtonLabelCell.swift; sourceTree = "<group>"; };
@@ -96,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				105F05832B1B7E8B00A78132 /* HomePageViewModel.swift */,
+				1066BA822B236A010004F391 /* PeoplePageViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -114,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				1008F1032B1B35F90049A3A8 /* Movie.swift */,
+				1066BA842B236B660004F391 /* People.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -122,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				105F05852B1B809E00A78132 /* HomePageViewController.swift */,
+				1066BA802B2369E20004F391 /* PeoplePageViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -139,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				107387A22B2260A40097D66D /* extension.swift */,
+				1066BA882B2375560004F391 /* TabViewController.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -221,11 +233,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1066BA832B236A010004F391 /* PeoplePageViewModel.swift in Sources */,
+				1066BA812B2369E20004F391 /* PeoplePageViewController.swift in Sources */,
 				1008F1002B1B30920049A3A8 /* NetworkManager.swift in Sources */,
 				10DC15972B1CF23A0018A402 /* HomePageTableViewCell.swift in Sources */,
+				1066BA852B236B660004F391 /* People.swift in Sources */,
 				107387A32B2260A40097D66D /* extension.swift in Sources */,
 				1008F0DF2B1B287B0049A3A8 /* AppDelegate.swift in Sources */,
 				1008F1082B1B367E0049A3A8 /* Endpoints.swift in Sources */,
+				1066BA892B2375560004F391 /* TabViewController.swift in Sources */,
 				105F05842B1B7E8B00A78132 /* HomePageViewModel.swift in Sources */,
 				105F05862B1B809E00A78132 /* HomePageViewController.swift in Sources */,
 				1008F0E92B1B287B0049A3A8 /* TheMovieApp.xcdatamodeld in Sources */,

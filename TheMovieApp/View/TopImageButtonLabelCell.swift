@@ -7,6 +7,12 @@
 
 import UIKit
 import Kingfisher
+
+protocol TopImageButtonLabelCellProtocol {
+    var titleString: String { get}
+    var imageString: String { get}
+    
+}
 class TopImageButtonLabelCell: UICollectionViewCell {
     static let reuseID = "TopImageButtonLabelCell"
     
@@ -45,6 +51,7 @@ class TopImageButtonLabelCell: UICollectionViewCell {
         contentView.addSubview(titleLabel)
         
         NSLayoutConstraint.activate([
+            imageView.heightAnchor.constraint(equalToConstant: 200),
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
             //imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 16),
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
@@ -55,17 +62,12 @@ class TopImageButtonLabelCell: UICollectionViewCell {
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
             titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0)
             
-            
-//            imageView.heightAnchor.constraint(equalToConstant: 240),
 //            titleLabel.heightAnchor.constraint(equalToConstant: 24)
         ])
     }
     
-    func configure(item: Result) {
-        titleLabel.text = item.title
-        if let path = item.backdropPath {
-            imageView.loadImage(url: path)
-        }
-        
+    func configure(item: TopImageButtonLabelCellProtocol) {
+        titleLabel.text = item.titleString
+        imageView.loadImage(url: item.imageString)
     }
 }

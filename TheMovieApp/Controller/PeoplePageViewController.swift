@@ -1,15 +1,14 @@
 //
-//  HomePageViewController.swift
+//  PeoplePageViewController.swift
 //  TheMovieApp
 //
-//  Created by Nazrin Sultanlı on 02.12.23.
+//  Created by Nazrin Sultanlı on 08.12.23.
 //
 
 import UIKit
 
-class HomePageViewController: UIViewController {
-    var viewModel = HomePageViewModel()
-
+class PeoplePageViewController: UIViewController {
+    var viewModel = PeoplePageViewModel()
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -20,29 +19,29 @@ class HomePageViewController: UIViewController {
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.delegate = self
         collection.dataSource = self
+       
         
-        collection.register(HomePageCollectionViewCell.self, forCellWithReuseIdentifier: HomePageCollectionViewCell.reuseID)
+        collection.register(TopImageButtonLabelCell.self, forCellWithReuseIdentifier: TopImageButtonLabelCell.reuseID)
         return collection
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureUI()
         setUpConstraints()
         configureViewModel()
     }
     
     func configureUI() {
-        title = "Movies"
+        title = "People"
         navigationController?.navigationBar.prefersLargeTitles = true
         view.backgroundColor = .white
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .done, target: nil, action: nil)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease.circle"), style: .done, target: nil, action: nil)
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .done, target: nil, action: nil)
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease.circle"), style: .done, target: nil, action: nil)
     }
     
     func configureViewModel() {
-        viewModel.getItems()
+        viewModel.getPeopleList()
         viewModel.error = {errorMessage in
             print("Error:\(errorMessage)")
         }
@@ -60,25 +59,28 @@ class HomePageViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,constant: 0),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,constant: 0)])
     }
+    
+
 }
 
 
-extension HomePageViewController:UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+
+extension PeoplePageViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel.items.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomePageCollectionViewCell.reuseID, for: indexPath) as! HomePageCollectionViewCell
-        let item = viewModel.items[indexPath.row]
-        cell.configure(title: item.title, movies: item.result)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TopImageButtonLabelCell.reuseID, for: indexPath) as! TopImageButtonLabelCell
+
+        cell.configure(item: viewModel.items[indexPath.item])
         return cell
     }
     
 
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        .init(width: collectionView.frame.width, height: 296)
+        .init(width: collectionView.frame.width/2 - 10, height: 296)
     }
     
   
