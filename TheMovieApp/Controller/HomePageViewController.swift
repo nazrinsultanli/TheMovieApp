@@ -38,7 +38,7 @@ class HomePageViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         view.backgroundColor = .white
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .done, target: nil, action: nil)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease.circle"), style: .done, target: nil, action: nil)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease.circle"), style: .done, target: nil, action:  #selector(seeAllButtonTapped))
     }
     
     func configureViewModel() {
@@ -83,11 +83,12 @@ extension HomePageViewController:UICollectionViewDataSource, UICollectionViewDel
     
   
     @objc func seeAllButtonTapped(_ sender: UIButton) {
-        // Handle "See All" button tap based on the section
         let section = sender.tag
+        self.navigationItem.rightBarButtonItem = (self.seeAllButtonTapped == true) ? self.buttonItem : nil
         print("See All button tapped for section \(section)")
-        // You can perform the necessary action, e.g., navigate to a new view controller
     }
     
-   
+//    @IBAction func seeAllButtonTapped(sender: UIBarButtonItem)    {
+//         /// some action
+//     }
 }
