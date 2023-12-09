@@ -35,9 +35,6 @@ class PeoplePageViewController: UIViewController {
     func configureUI() {
         title = "People"
         navigationController?.navigationBar.prefersLargeTitles = true
-        view.backgroundColor = .white
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .done, target: nil, action: nil)
-//        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease.circle"), style: .done, target: nil, action: nil)
     }
     
     func configureViewModel() {
@@ -81,14 +78,6 @@ extension PeoplePageViewController: UICollectionViewDataSource, UICollectionView
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         .init(width: collectionView.frame.width/2 - 10, height: 296)
-    }
-    
-  
-    @objc func seeAllButtonTapped(_ sender: UIButton) {
-        // Handle "See All" button tap based on the section
-        let section = sender.tag
-        print("See All button tapped for section \(section)")
-        // You can perform the necessary action, e.g., navigate to a new view controller
     }
     
    

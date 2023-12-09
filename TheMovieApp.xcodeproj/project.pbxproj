@@ -16,6 +16,8 @@
 		1008F1002B1B30920049A3A8 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1008F0FF2B1B30920049A3A8 /* NetworkManager.swift */; };
 		1008F1042B1B35F90049A3A8 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1008F1032B1B35F90049A3A8 /* Movie.swift */; };
 		1008F1082B1B367E0049A3A8 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1008F1072B1B367E0049A3A8 /* Endpoints.swift */; };
+		1045563C2B245E9500E7E883 /* SearchfromHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1045563B2B245E9500E7E883 /* SearchfromHomeViewController.swift */; };
+		1045563E2B24701F00E7E883 /* SearchViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1045563D2B24701F00E7E883 /* SearchViewTableViewCell.swift */; };
 		105F05842B1B7E8B00A78132 /* HomePageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105F05832B1B7E8B00A78132 /* HomePageViewModel.swift */; };
 		105F05862B1B809E00A78132 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105F05852B1B809E00A78132 /* HomePageViewController.swift */; };
 		1066BA812B2369E20004F391 /* PeoplePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1066BA802B2369E20004F391 /* PeoplePageViewController.swift */; };
@@ -40,6 +42,8 @@
 		1008F0FF2B1B30920049A3A8 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		1008F1032B1B35F90049A3A8 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		1008F1072B1B367E0049A3A8 /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
+		1045563B2B245E9500E7E883 /* SearchfromHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchfromHomeViewController.swift; sourceTree = "<group>"; };
+		1045563D2B24701F00E7E883 /* SearchViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewTableViewCell.swift; sourceTree = "<group>"; };
 		105F05832B1B7E8B00A78132 /* HomePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewModel.swift; sourceTree = "<group>"; };
 		105F05852B1B809E00A78132 /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		1066BA802B2369E20004F391 /* PeoplePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeoplePageViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +137,7 @@
 			children = (
 				105F05852B1B809E00A78132 /* HomePageViewController.swift */,
 				1066BA802B2369E20004F391 /* PeoplePageViewController.swift */,
+				1045563B2B245E9500E7E883 /* SearchfromHomeViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -142,6 +147,7 @@
 			children = (
 				10DC15962B1CF23A0018A402 /* HomePageTableViewCell.swift */,
 				10A4DD7A2B1E30940009254C /* TopImageButtonLabelCell.swift */,
+				1045563D2B24701F00E7E883 /* SearchViewTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -242,6 +248,8 @@
 				1008F0DF2B1B287B0049A3A8 /* AppDelegate.swift in Sources */,
 				1008F1082B1B367E0049A3A8 /* Endpoints.swift in Sources */,
 				1066BA892B2375560004F391 /* TabViewController.swift in Sources */,
+				1045563C2B245E9500E7E883 /* SearchfromHomeViewController.swift in Sources */,
+				1045563E2B24701F00E7E883 /* SearchViewTableViewCell.swift in Sources */,
 				105F05842B1B7E8B00A78132 /* HomePageViewModel.swift in Sources */,
 				105F05862B1B809E00A78132 /* HomePageViewController.swift in Sources */,
 				1008F0E92B1B287B0049A3A8 /* TheMovieApp.xcdatamodeld in Sources */,

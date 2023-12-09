@@ -37,8 +37,18 @@ class HomePageViewController: UIViewController {
         title = "Movies"
         navigationController?.navigationBar.prefersLargeTitles = true
         view.backgroundColor = .white
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .done, target: nil, action: nil)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.decrease.circle"), style: .done, target: nil, action:  #selector(seeAllButtonTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "magnifyingglass"), 
+            style: .done, 
+            target: self,
+            action:  #selector(searchButton)
+        )
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "line.3.horizontal.decrease.circle"),
+            style: .done,
+            target: nil,
+            action: nil)
     }
     
     func configureViewModel() {
@@ -82,13 +92,10 @@ extension HomePageViewController:UICollectionViewDataSource, UICollectionViewDel
     }
     
   
-    @objc func seeAllButtonTapped(_ sender: UIButton) {
-        let section = sender.tag
-        self.navigationItem.rightBarButtonItem = (self.seeAllButtonTapped == true) ? self.buttonItem : nil
-        print("See All button tapped for section \(section)")
+    @objc func searchButton() {
+        let cv = SearchfromHomeViewController()
+        navigationController?.show(cv, sender: nil)
     }
     
-//    @IBAction func seeAllButtonTapped(sender: UIBarButtonItem)    {
-//         /// some action
-//     }
+
 }
