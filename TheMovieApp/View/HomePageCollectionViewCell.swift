@@ -9,8 +9,8 @@ import UIKit
 
 class HomePageCollectionViewCell: UICollectionViewCell {
     
-    static let reuseID = "HomePageTableViewCell"
-    var movies = [Result]()
+    static let reuseID = "HomePageCollectionViewCell"
+    var movies = [MovieResult]()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -56,7 +56,7 @@ class HomePageCollectionViewCell: UICollectionViewCell {
         fatalError("Init(coder:) has not been implemented")
     }
     
-    func configure(title: String, movies: [Result]) {
+    func configure(title: String, movies: [MovieResult]) {
         titleLabel.text = title
         self.movies = movies
         collectionView.reloadData()

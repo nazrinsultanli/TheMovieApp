@@ -10,22 +10,131 @@ import UIKit
 class SearchViewTableViewCell: UITableViewCell {
     static let reuseID = "SearchViewTableViewCell"
     
-    private lazy var imageViewm: UIView = {
-        let imageViewm = UIView()
+    
+    private lazy var movieImage: UIImageView = {
+        let imageViewm = UIImageView()
         imageViewm.translatesAutoresizingMaskIntoConstraints = false
-        imageViewm.backgroundColor = . white
         imageViewm.layer.cornerRadius = 25
-        imageViewm.layer.borderWidth = 1
+        imageViewm.contentMode = .scaleAspectFill
+        imageViewm.layer.masksToBounds = true
         return imageViewm
     }()
- 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
+    
+    
+    private lazy var starImage: UIImageView = {
+        let imageViewm = UIImageView()
+        imageViewm.translatesAutoresizingMaskIntoConstraints = false
+        imageViewm.contentMode = .scaleAspectFill
+       // imageViewm.layer.masksToBounds = true
+        imageViewm.tintColor = .yellow
+       // imageViewm.frame = CGRect(x: 0, y: 0, width: 20, height:20)
+        return imageViewm
+    }()
+    
+    private lazy var ratingTextLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.boldSystemFont(ofSize: 12)
+        label.textAlignment = .left
+        label.numberOfLines = 1
+        label.textColor = .gray
+        return label
+    }()
+    
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+ 
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        label.backgroundColor = .cyan
+        return label
+    }()
+    
+//    private lazy var ratingView: UIView = {
+//        let rView = UIView()
+//        rView.translatesAutoresizingMaskIntoConstraints = false
+//        rView.backgroundColor = .red
+//        return rView
+//    }()
+    
+    private lazy var descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.boldSystemFont(ofSize: 12)
+        label.textAlignment = .left
+        label.numberOfLines = 3
+        return label
+    }()
+
+  
+    required init?(coder: NSCoder) {
+           fatalError("Init(coder:) has not been implemented")
+       }
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+           super.init(style: style, reuseIdentifier: reuseIdentifier)
+           setUpConstraints()
+    }
+    
+    func configure(item: MovieResult) {
+        titleLabel.text = item.originalTitle
+        movieImage.loadImage(url: item.posterPath ?? "")
+        descriptionLabel.text = item.overview
+        starImage.image =  UIImage(systemName: "star.fill")
+        if let rating = item.voteAverage {
+            ratingTextLabel.text = "\(String(describing: rating)) / 10 IMDB"
+        }
+        
         
     }
-
+    
+    func setUpConstraints() {
+        addSubview(movieImage)
+        
+        let ratingView = UIStackView()
+        ratingView.addArrangedSubview(starImage)
+        ratingView.addArrangedSubview(ratingTextLabel)
+        ratingView.axis = .horizontal
+        ratingView.spacing = 10
+        
+        
+        
+        
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.addArrangedSubview(titleLabel)
+        stack.addArrangedSubview(ratingView)
+        stack.addArrangedSubview(descriptionLabel)
+        stack.axis = .vertical // Set the stack view's axis to vertical
+        stack.backgroundColor = .purple
+       // stack.spacing = 4
+        stack.distribution = .fillEqually
+        addSubview(stack)
+        
+        
+        
+        
+        NSLayoutConstraint.activate([
+            movieImage.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            movieImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            movieImage.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            movieImage.widthAnchor.constraint(equalToConstant: 140),
+            
+            stack.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            stack.leadingAnchor.constraint(equalTo: movieImage.trailingAnchor, constant: 20),
+            stack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
+            stack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            
+            starImage.leadingAnchor.constraint(equalTo: ratingView.leadingAnchor, constant: 10),
+            starImage.topAnchor.constraint(equalTo: ratingView.topAnchor, constant: 10),
+            starImage.bottomAnchor.constraint(equalTo: ratingView.bottomAnchor, constant: 10),
+            //            starImage.centerYAnchor.constraint(equalTo: ratingView.centerYAnchor) ,
+            starImage.widthAnchor.constraint(equalToConstant: 20),
+//            starImage.heightAnchor.constraint(equalToConstant: 10)
+            ratingTextLabel.trailingAnchor.constraint(equalTo: starImage.leadingAnchor, constant: 10)
+        ])
+     
+    }
 }

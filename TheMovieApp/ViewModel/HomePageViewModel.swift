@@ -9,7 +9,7 @@ import Foundation
 
 struct homeModel {
     let title: String
-    let result: [Result]
+    let result: [MovieResult]
 }
 
 class HomePageViewModel {
