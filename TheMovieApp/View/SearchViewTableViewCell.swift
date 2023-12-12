@@ -80,8 +80,6 @@ class SearchViewTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
            super.init(style: style, reuseIdentifier: reuseIdentifier)
            setUpConstraints()
-        
-        
     }
     
     func configure(item: MovieResult) {
@@ -99,11 +97,11 @@ class SearchViewTableViewCell: UITableViewCell {
                     }
                 }
             }
-  
     }
 
     func setUpConstraints() {
         addSubview(movieImage)
+        contentView.backgroundColor = .white
         
         let ratingView = UIStackView()
         ratingView.addArrangedSubview(starImage)
@@ -159,7 +157,6 @@ extension SearchViewTableViewCell: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
         .init(width: 80, height: 24)
     }
 }

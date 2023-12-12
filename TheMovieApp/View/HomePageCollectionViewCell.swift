@@ -6,8 +6,14 @@
 //
 
 import UIKit
+//1
+protocol HomePageCollectionViewCellDelegate: AnyObject {
+    func didSelectMovie(_ movie: MovieResult)
+}
 
 class HomePageCollectionViewCell: UICollectionViewCell {
+    //2
+    weak var delegate: HomePageCollectionViewCellDelegate?
     
     static let reuseID = "HomePageCollectionViewCell"
     var movies = [MovieResult]()
@@ -116,4 +122,9 @@ extension HomePageCollectionViewCell:  UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 20
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //3
+            let selectedMovie = movies[indexPath.row]
+            delegate?.didSelectMovie(selectedMovie)
+        }
 }

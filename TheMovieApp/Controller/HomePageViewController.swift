@@ -82,6 +82,7 @@ extension HomePageViewController:UICollectionViewDataSource, UICollectionViewDel
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomePageCollectionViewCell.reuseID, for: indexPath) as! HomePageCollectionViewCell
         let item = viewModel.items[indexPath.row]
+        cell.delegate = self
         cell.configure(title: item.title, movies: item.result)
         return cell
     }
@@ -98,4 +99,15 @@ extension HomePageViewController:UICollectionViewDataSource, UICollectionViewDel
     }
     
 
+}
+
+
+extension HomePageViewController: HomePageCollectionViewCellDelegate {
+    func didSelectMovie(_ movie: MovieResult) {
+           let movieDetailVC = MovieDetailedPageViewController()
+           // Pass the selected movie to the detail view controller
+           movieDetailVC.selectedMovie = movie
+           navigationController?.pushViewController(movieDetailVC, animated: true)
+        //navigationController?.show(movieDetailVC, sender: nil)
+       }
 }
