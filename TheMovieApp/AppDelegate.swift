@@ -10,13 +10,16 @@ import CoreData
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    static let MyGenres = [Int]()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        
+    
+        GenresHelper.shared.initializeArray()
+       
         return true
     }
+    
+    
 
     /*
     // MARK: UISceneSession Lifecycle

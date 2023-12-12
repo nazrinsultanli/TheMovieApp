@@ -50,6 +50,8 @@ class SearchfromHomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+     
+        
         setUpUI()
         searchTextField.delegate = self
         searchTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
