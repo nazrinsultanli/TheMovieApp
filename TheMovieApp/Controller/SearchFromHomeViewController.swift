@@ -8,7 +8,7 @@
 import UIKit
 import UIKit
 
-class SearchfromHomeViewController: UIViewController {
+class SearchFromHomeViewController: UIViewController {
 
     var viewModel = SearchPageViewModel()
     
@@ -53,16 +53,23 @@ class SearchfromHomeViewController: UIViewController {
      
         
         setUpUI()
+        configureConstraints()
+        configureViewModel()
+    }
+
+    func setUpUI() {
+        title = "Search"
+        view.backgroundColor = .white
+    
         searchTextField.delegate = self
         searchTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
     }
-
-    func setUpUI(){
-        view.backgroundColor = .white
+    
+    fileprivate func configureConstraints() {
         view.addSubview(searchView)
         searchView.addSubview(searchTextField)
         view.addSubview(tableView)
-    
+        
         NSLayoutConstraint.activate([
             searchView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
             searchView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
@@ -80,9 +87,18 @@ class SearchfromHomeViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
         ])
     }
+    
+    fileprivate func configureViewModel() {
+        viewModel.error = { errorMessage in
+            print("Error:\(errorMessage)")
+        }
+        viewModel.success = {
+            self.tableView.reloadData()
+        }
+    }
 }
 
-extension SearchfromHomeViewController: UITableViewDataSource, UITableViewDelegate {
+extension SearchFromHomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.items.count
     }
@@ -98,15 +114,14 @@ extension SearchfromHomeViewController: UITableViewDataSource, UITableViewDelega
     }
 }
 
-extension SearchfromHomeViewController: UITextFieldDelegate {
+extension SearchFromHomeViewController: UITextFieldDelegate {
     @objc func textFieldDidChange(_ textField: UITextField) {
         let searchText = textField.text ?? ""
-        viewModel.getSearchedMovies(searchText: searchText)
-        viewModel.error = { errorMessage in
-            print("Error:\(errorMessage)")
-        }
-        viewModel.success = {
-            self.tableView.reloadData()
+        if searchText.isEmpty {
+            viewModel.items.removeAll()
+            tableView.reloadData()
+        } else {
+            viewModel.getSearchedMovies(searchText: searchText)
         }
     }
     

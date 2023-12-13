@@ -40,7 +40,7 @@ struct MovieResult: Codable, TopImageButtonLabelCellProtocol {
     }
     
     var imageString: String {
-        backdropPath ?? ""
+        posterPath ?? ""
     }
     enum CodingKeys: String, CodingKey {
         case adult

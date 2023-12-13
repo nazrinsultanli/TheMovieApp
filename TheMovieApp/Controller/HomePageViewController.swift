@@ -92,13 +92,10 @@ extension HomePageViewController:UICollectionViewDataSource, UICollectionViewDel
         .init(width: collectionView.frame.width, height: 296)
     }
     
-  
     @objc func searchButton() {
-        let cv = SearchfromHomeViewController()
+        let cv = SearchFromHomeViewController()
         navigationController?.show(cv, sender: nil)
     }
-    
-
 }
 
 

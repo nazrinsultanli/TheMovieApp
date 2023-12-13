@@ -5,15 +5,18 @@
 //  Created by Nazrin Sultanlı on 13.12.23.
 //
 
-import Foundation
 import UIKit
+import Foundation
+
 class LabelAndCollectionView: UIView, UICollectionViewDataSource, UICollectionViewDelegate {
     
     var data: [String] = [] {
-           didSet {
-               collectionView.reloadData()
-           }
-       }
+        didSet {
+            if !data.isEmpty {
+                collectionView.reloadData()
+            }
+        }
+    }
     
     private lazy var label: UILabel = {
         let label = UILabel()
@@ -37,9 +40,10 @@ class LabelAndCollectionView: UIView, UICollectionViewDataSource, UICollectionVi
         return collectionView
     }()
     
-    init(labelText: String) {
+    init() {
         super.init(frame: .zero)
-        label.text = labelText
+        
+//        label.text = labelText
         setupViews()
     }
     
@@ -49,20 +53,23 @@ class LabelAndCollectionView: UIView, UICollectionViewDataSource, UICollectionVi
     
     private func setupViews() {
         addSubview(label)
-        addSubview(collectionView)
+//        addSubview(collectionView)
         
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(equalTo: topAnchor),
             label.leadingAnchor.constraint(equalTo: leadingAnchor),
             label.trailingAnchor.constraint(equalTo: trailingAnchor),
             
-            collectionView.topAnchor.constraint(equalTo: label.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
+//            collectionView.topAnchor.constraint(equalTo: label.bottomAnchor),
+//            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+//            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+//            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
     
+    func configure(text: String) {
+        label.text = text
+    }    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         data.count

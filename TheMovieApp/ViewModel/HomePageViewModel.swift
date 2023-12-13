@@ -14,6 +14,7 @@ struct homeModel {
 
 class HomePageViewModel {
 
+    private let manager = HomePageManager()
     var items = [homeModel]()
     var success: (() -> Void)?
     var error: ((String) -> Void)?
@@ -25,19 +26,16 @@ class HomePageViewModel {
         getMovies(endpoint: Endpoints.upComing, title: "Up Coming")
     }
     func getMovies(endpoint: Endpoints, title: String) {
-        NetworkManager.request(
-            model: Movie.self,
-            url: endpoint.rawValue
-        ) {[weak self] data, errorMessage in
-           
+        
+        manager.getMovieList(searchText: nil, endPoint: endpoint){ data, errorMessage in
+            
             if let errorMessage {
-                self?.error?(errorMessage)
+                self.error?(errorMessage)
             } else if let data {
                 guard let results = data.results else  {return}
-                self?.items.append(.init(title: title, result: results))
-                self?.success?()
+                self.items.append(.init(title: title, result: results))
+                self.success?()
             }
- 
         }
     }
 }

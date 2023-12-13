@@ -14,14 +14,9 @@ class SearchPageViewModel {
     var success: (() -> Void)?
     var error: ((String) -> Void)?
     
-    
-    func getSearchedMovies( searchText: String) {
-        let path = Endpoints.searchMovie.rawValue + "?query=\(searchText)"
-        
-        NetworkManager.request(
-            model: Movie.self,
-            url: path) {[weak self] data, errorMessage in
-           
+    let manager = SearchManager()
+    func getSearchedMovies(searchText: String) {
+        manager.getMovieList(searchText: searchText, endPoint: .searchMovie) { [weak self] data, errorMessage in           
             if let errorMessage {
                 self?.error?(errorMessage)
             } else if let data {

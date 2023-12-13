@@ -11,6 +11,7 @@ class MovieDetailedPageViewController: UIViewController {
     var selectedMovie: MovieResult?
     var genres = [String]()
     let genreArray = GenresHelper.shared.genres
+    
     private let scrollViewm: UIScrollView = {
         let sv = UIScrollView()
         sv.translatesAutoresizingMaskIntoConstraints = false
@@ -97,49 +98,52 @@ class MovieDetailedPageViewController: UIViewController {
     }()
     
     private lazy var containerGenreView: UIView = {
-            let view = UIView()
-            view.translatesAutoresizingMaskIntoConstraints = false
-            // Additional setup for your container view
-            
-            return view
-        }()
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        // Additional setup for your container view
         
-    private lazy var genresInfoView: LabelAndCollectionView = {
-        let view = LabelAndCollectionView(labelText: "Genres")
         return view
     }()
     
-    private lazy var directorsInfoView: LabelAndCollectionView = {
-            let view = LabelAndCollectionView(labelText: "Directors")
-            return view
-        }()
+//    private var genresInfoView: LabelAndCollectionView = {
+//        let view = LabelAndCollectionView()
+//        view.configure(text: "Genres")
+//        return view
+//    }()
+//    
+//    private var directorsInfoView: LabelAndCollectionView = {
+//        let view = LabelAndCollectionView()
+//        view.configure(text: "Directors")
+//        return view
+//    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        configure()
-        setUpConstraints()
         
+        setUpConstraints()
+        configure()
     }
-
+    
     func configure() {
-        movieImage.loadImage(url: selectedMovie?.posterPath ?? "")
         titleLabel.text = selectedMovie?.title
-        languageLabel.text = selectedMovie?.originalLanguage ?? ""
         durationLabel.text = selectedMovie?.releaseDate ?? ""
+        movieImage.loadImage(url: selectedMovie?.posterPath ?? "")
+        languageLabel.text = selectedMovie?.originalLanguage ?? ""
         ratingLabel.text = "\(String(describing: selectedMovie?.voteAverage))/10"
         
         if let genreIDs = selectedMovie?.genreIDS {
-                for genreIndex in genreIDs {
-                    if genreIndex >= 0, genreIndex < genreArray.count {
-                        genres.append(genreArray[genreIndex].name ?? "" )
-                    }
+            for genreIndex in genreIDs {
+                if genreIndex >= 0, genreIndex < genreArray.count {
+                    genres.append(genreArray[genreIndex].name ?? "" )
                 }
             }
-        genresInfoView.data = genres
-        directorsInfoView.data = ["asas","frfrf","ioio"]
+        }
+//        genresInfoView.data = genres
+//        directorsInfoView.data = ["asas", "frfrf", "ioio"]
         
     }
+    
     @objc func suitDidChange(_ segmentedControl: UISegmentedControl) {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
@@ -154,6 +158,7 @@ class MovieDetailedPageViewController: UIViewController {
             print("f")
         }
     }
+    
     func setUpConstraints() {
         view.addSubview(scrollViewm)
         scrollViewm.addSubview(contentViewm)
@@ -190,7 +195,6 @@ class MovieDetailedPageViewController: UIViewController {
         stackLanDurRa.spacing = 6
         stackLanDurRa.axis = .horizontal
         stackLanDurRa.translatesAutoresizingMaskIntoConstraints = false
-        
         contentViewm.addSubview(stackLanDurRa)
         
         let items = ["Details", "Trails","Cast","Shots"]
@@ -198,9 +202,9 @@ class MovieDetailedPageViewController: UIViewController {
         segmentedControl.addTarget(self, action: #selector(suitDidChange(_:)), for: .valueChanged)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.tintColor = .blue
-        contentViewm.addSubview(segmentedControl)
-        contentViewm.addSubview(genresInfoView)
-        contentViewm.addSubview(directorsInfoView)
+//        contentViewm.addSubview(segmentedControl)
+//        contentViewm.addSubview(genresInfoView)
+//        contentViewm.addSubview(directorsInfoView)
         
         NSLayoutConstraint.activate([
             scrollViewm.topAnchor.constraint(equalTo: view.topAnchor),
@@ -232,12 +236,17 @@ class MovieDetailedPageViewController: UIViewController {
             segmentedControl.topAnchor.constraint(equalTo: stackLanDurRa.bottomAnchor, constant: 20),
             segmentedControl.leadingAnchor.constraint(equalTo: contentViewm.leadingAnchor, constant: 20),
             segmentedControl.trailingAnchor.constraint(equalTo: contentViewm.trailingAnchor, constant: -20),
-            segmentedControl.heightAnchor.constraint(equalToConstant: 50)
+            segmentedControl.heightAnchor.constraint(equalToConstant: 50),
             
-            
-            
-            
-            
+//            genresInfoView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 20),
+//            genresInfoView.leadingAnchor.constraint(equalTo: segmentedControl.leadingAnchor),
+//            genresInfoView.trailingAnchor.constraint(equalTo: segmentedControl.trailingAnchor),
+//            genresInfoView.heightAnchor.constraint(equalToConstant: 50),
+//            
+//            directorsInfoView.topAnchor.constraint(equalTo: genresInfoView.bottomAnchor, constant: 20),
+//            directorsInfoView.leadingAnchor.constraint(equalTo: genresInfoView.leadingAnchor),
+//            directorsInfoView.trailingAnchor.constraint(equalTo: genresInfoView.trailingAnchor),
+//            directorsInfoView.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     
