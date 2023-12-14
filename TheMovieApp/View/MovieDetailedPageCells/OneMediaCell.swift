@@ -27,6 +27,7 @@ class OneMediaCell: UICollectionViewCell {
         super.init(frame: frame)
         contentView.backgroundColor = .clear
         setUpCell()
+        contentView.backgroundColor = .gray
     }
     
     required init?(coder: NSCoder) {

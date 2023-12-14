@@ -11,13 +11,16 @@ import UIKit
 //    var mediaString: String { get}
 //    
 //}
+
+
+    
 class OneTitleCell: UICollectionViewCell {
     static let reuseID = "OneTitleCell"
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textAlignment = .left
         label.numberOfLines = 0
         label.backgroundColor = .clear
@@ -26,7 +29,7 @@ class OneTitleCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-       // contentView.backgroundColor = .black
+       contentView.backgroundColor = .blue
         setUpCell()
     }
     
@@ -40,9 +43,9 @@ class OneTitleCell: UICollectionViewCell {
         
         NSLayoutConstraint.activate([
             titleLabel.heightAnchor.constraint(equalToConstant: 50),
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0)
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20)
         ])
     }
     

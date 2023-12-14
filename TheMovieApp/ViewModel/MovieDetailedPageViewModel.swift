@@ -17,7 +17,7 @@ enum MovieDetailItemType {
 }
 struct MovieDetailedModel {
     let type: MovieDetailItemType
-    var data: Any
+    var data: Any?
 }
 
 struct InfoThreeModel {
@@ -28,12 +28,7 @@ struct InfoThreeModel {
 class MovieDetailedPageViewModel {
     var success: (() -> Void)?
     var error: ((String) -> Void)?
-        
     var items = [MovieDetailedModel]()
-    
-    
-    
-
     
     func getDetailed(id: Int) {
         let path = Endpoints.detailedMovie.rawValue + "\(id)"
@@ -41,27 +36,31 @@ class MovieDetailedPageViewModel {
             model: MovieDetailed.self,
             url: path
         ) {[weak self] data, errorMessage in
-           
+            
             if let errorMessage {
                 self?.error?(errorMessage)
             } else if let data {
-                guard let media = data.posterPath else  {return}
-                self?.items.append(.init(type: .media, data: media))
-                
-                guard let title = data.title else  {return}
-                self?.items.append(.init(type: .title, data: title))
-                
-                guard let infoOneLanguage = data.originalLanguage else  {return}
-                guard let infoTwoReleaseDate = data.releaseDate else  {return}
-                guard let infoThreeRating = data.voteAverage else  {return}
-                self?.items.append(.init(type: .infoThree, data: InfoThreeModel(language: infoOneLanguage,
-                                                                            releaseData: infoTwoReleaseDate,
-                                                                            imdbRating: infoThreeRating)))
-                
-                
+                if let media = data.posterPath{
+                    self?.items.append(.init(type: .media, 
+                                             data: media))
+                }
+                if let title = data.title{
+                    self?.items.append(.init(type: .title, 
+                                             data: title))
+                }
+                if let infoOneLanguage = data.spokenLanguages?[0].englishName {
+                    if let infoTwoReleaseDate = data.releaseDate {
+                        if let infoThreeRating = data.voteAverage {
+                            self?.items.append(.init(type: .infoThree,
+                                                     data: InfoThreeModel(language: infoOneLanguage,
+                                                                          releaseData: infoTwoReleaseDate,
+                                                                          imdbRating: infoThreeRating)))
+                        }
+                    }
+                }
                 self?.success?()
             }
- 
+            
         }
     }
 }

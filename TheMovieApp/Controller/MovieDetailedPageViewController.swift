@@ -47,6 +47,7 @@ class MovieDetailedPageViewController: UIViewController {
             print("Error:\(errorMessage)")
         }
         viewModel.success =  {
+            print(self.viewModel.items)
             self.collectionView.reloadData()
         }
     }
@@ -54,6 +55,7 @@ class MovieDetailedPageViewController: UIViewController {
     func registerCollectionViewCells() {
         collectionView.register(OneMediaCell.self, forCellWithReuseIdentifier: OneMediaCell.reuseID)
         collectionView.register(OneTitleCell.self, forCellWithReuseIdentifier: OneTitleCell.reuseID)
+        collectionView.register(InfoThreeLabelImageCell.self, forCellWithReuseIdentifier: InfoThreeLabelImageCell.reuseID)
     }
 
     func setUpConstraints() {
@@ -77,18 +79,22 @@ extension MovieDetailedPageViewController: UICollectionViewDataSource, UICollect
         let item = viewModel.items[indexPath.item]
         switch item.type {
         case .media:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OneMediaCell.reuseID, for: indexPath) as! OneMediaCell
+            guard let  cell = collectionView.dequeueReusableCell(withReuseIdentifier: OneMediaCell.reuseID, for: indexPath) as? OneMediaCell else { return UICollectionViewCell() }
             cell.configure(item: item.data as! String)
             return cell
         case .title:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OneTitleCell.reuseID, for: indexPath) as! OneTitleCell
+            guard let  cell = collectionView.dequeueReusableCell(withReuseIdentifier: OneTitleCell.reuseID, for: indexPath) as? OneTitleCell else { return UICollectionViewCell() }
             cell.configure(item: item.data as! String)
             return cell
-//        case .infoThree:
-//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
-//            return cell
+            
+        case .infoThree:
+            guard let   cell = collectionView.dequeueReusableCell(withReuseIdentifier: InfoThreeLabelImageCell.reuseID, for: indexPath) as? InfoThreeLabelImageCell else { return UICollectionViewCell() }
+            cell.configure(info: item.data as! InfoThreeModel)
+            return cell
         default:
-            return UICollectionViewCell()
+              guard let  cell = collectionView.dequeueReusableCell(withReuseIdentifier: OneMediaCell.reuseID, for: indexPath) as? OneMediaCell else { return UICollectionViewCell() }
+//            cell.configure(item: item.data as! String)
+            return cell
         }
     }
 
@@ -99,6 +105,9 @@ extension MovieDetailedPageViewController: UICollectionViewDataSource, UICollect
             return .init(width: collectionView.frame.width, height: collectionView.frame.height)
         case .title:
             return .init(width: collectionView.frame.width, height: 50)
+        case .infoThree:
+            return .init(width: collectionView.frame.width, height: 50)
+
         default:
             return .zero
         }
