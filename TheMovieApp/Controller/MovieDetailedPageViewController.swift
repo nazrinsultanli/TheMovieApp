@@ -56,8 +56,9 @@ class MovieDetailedPageViewController: UIViewController {
         collectionView.register(OneMediaCell.self, forCellWithReuseIdentifier: OneMediaCell.reuseID)
         collectionView.register(OneTitleCell.self, forCellWithReuseIdentifier: OneTitleCell.reuseID)
         collectionView.register(InfoThreeLabelImageCell.self, forCellWithReuseIdentifier: InfoThreeLabelImageCell.reuseID)
+        collectionView.register(SegmentControlCell.self, forCellWithReuseIdentifier: SegmentControlCell.reuseID)
+        collectionView.register(SegmentDetailCell.self, forCellWithReuseIdentifier: SegmentDetailCell.reuseID)
     }
-
     func setUpConstraints() {
         view.addSubview(collectionView)
         
@@ -70,7 +71,6 @@ class MovieDetailedPageViewController: UIViewController {
 }
 
 extension MovieDetailedPageViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel.items.count
     }
@@ -91,28 +91,31 @@ extension MovieDetailedPageViewController: UICollectionViewDataSource, UICollect
             guard let   cell = collectionView.dequeueReusableCell(withReuseIdentifier: InfoThreeLabelImageCell.reuseID, for: indexPath) as? InfoThreeLabelImageCell else { return UICollectionViewCell() }
             cell.configure(info: item.data as! InfoThreeModel)
             return cell
+        case .segment:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SegmentControlCell.reuseID, for: indexPath) as? SegmentControlCell else { return UICollectionViewCell() }
+            cell.delegate = self
+            return cell
+        case .details:
+            guard let   cell = collectionView.dequeueReusableCell(withReuseIdentifier: SegmentDetailCell.reuseID, for: indexPath) as? SegmentDetailCell else { return UICollectionViewCell() }
+            cell.configure(item: item.data as! SegmentDetailsModel)
+            return cell
         default:
               guard let  cell = collectionView.dequeueReusableCell(withReuseIdentifier: OneMediaCell.reuseID, for: indexPath) as? OneMediaCell else { return UICollectionViewCell() }
-//            cell.configure(item: item.data as! String)
             return cell
         }
     }
-
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let item = viewModel.items[indexPath.item]
-        switch item.type {
-        case .media:
-            return .init(width: collectionView.frame.width, height: collectionView.frame.height)
-        case .title:
-            return .init(width: collectionView.frame.width, height: 50)
-        case .infoThree:
-            return .init(width: collectionView.frame.width, height: 50)
-
-        default:
-            return .zero
-        }
+        return .init(width: collectionView.frame.width, height: viewModel.items[indexPath.item].height)
+        
     }
     
+}
+extension MovieDetailedPageViewController: SegmentControlCellCelectionDelegate {
+    func didSelectSegment(removed: String) {
+        viewModel.didSelectSegment(removed)
+    }
+    
+  
 }
 
 
@@ -132,70 +135,7 @@ extension MovieDetailedPageViewController: UICollectionViewDataSource, UICollect
      let genreArray = GenresHelper.shared.genres
      var viewModel = MovieDetailedPageViewModel()
      
-     
-     private lazy var titleLabel: UILabel = {
-         let label = UILabel()
-         label.translatesAutoresizingMaskIntoConstraints = false
-         label.font = UIFont.boldSystemFont(ofSize: 16)
-         label.textAlignment = .left
-         label.numberOfLines = 0
-         label.backgroundColor = .cyan
-         return label
-     }()
-     
-     private lazy var languageLabel: UILabel = {
-         let label = UILabel()
-         label.translatesAutoresizingMaskIntoConstraints = false
-         label.font = UIFont.boldSystemFont(ofSize: 12)
-         label.textAlignment = .left
-         label.numberOfLines = 0
-         return label
-     }()
-     
-     private lazy var languageImage: UIImageView = {
-         let imageViewm = UIImageView()
-         imageViewm.translatesAutoresizingMaskIntoConstraints = false
-         imageViewm.layer.cornerRadius = 10
-         imageViewm.contentMode = .scaleAspectFill
-         imageViewm.layer.masksToBounds = true
-         return imageViewm
-     }()
-     
-     private lazy var durationLabel: UILabel = {
-         let label = UILabel()
-         label.translatesAutoresizingMaskIntoConstraints = false
-         label.font = UIFont.boldSystemFont(ofSize: 12)
-         label.textAlignment = .left
-         label.numberOfLines = 0
-         return label
-     }()
-     
-     private lazy var durationImage: UIImageView = {
-         let imageViewm = UIImageView()
-         imageViewm.translatesAutoresizingMaskIntoConstraints = false
-         imageViewm.layer.cornerRadius = 10
-         imageViewm.contentMode = .scaleAspectFill
-         imageViewm.layer.masksToBounds = true
-         return imageViewm
-     }()
-     
-     private lazy var ratingLabel: UILabel = {
-         let label = UILabel()
-         label.translatesAutoresizingMaskIntoConstraints = false
-         label.font = UIFont.boldSystemFont(ofSize: 12)
-         label.textAlignment = .left
-         label.numberOfLines = 0
-         return label
-     }()
-     
-     private lazy var ratingImage: UIImageView = {
-         let imageViewm = UIImageView()
-         imageViewm.translatesAutoresizingMaskIntoConstraints = false
-         imageViewm.layer.cornerRadius = 10
-         imageViewm.contentMode = .scaleAspectFill
-         imageViewm.layer.masksToBounds = true
-         return imageViewm
-     }()
+   
      
      private lazy var containerGenreView: UIView = {
          let view = UIView()
@@ -225,15 +165,7 @@ extension MovieDetailedPageViewController: UICollectionViewDataSource, UICollect
          //setUpConstraints()
          configure()
      }
-     func configureViewModel() {
-         viewModel.getDetailed(id: selectedMovieID)
-         viewModel.error = {errorMessage in
-             print("Error:\(errorMessage)")
-         }
-         viewModel.success =  {
-             print(self.viewModel.items)
-         }
-     }
+
      func configure() {
          
  //        titleLabel.text = selectedMovie?.title
@@ -262,65 +194,10 @@ extension MovieDetailedPageViewController: UICollectionViewDataSource, UICollect
      
      
      
-     @objc func suitDidChange(_ segmentedControl: UISegmentedControl) {
-         switch segmentedControl.selectedSegmentIndex {
-         case 0:
-             print("a")
-         case 1:
-             print("b")
-         case 2:
-             print("c")
-         case 3:
-             print("d")
-         default:
-             print("f")
-         }
-     }
+   
      
      func setUpConstraints() {
-         view.addSubview(scrollViewm)
-         scrollViewm.addSubview(contentViewm)
-         
-         let hConst = contentViewm.heightAnchor.constraint(equalTo: scrollViewm.heightAnchor)
-         hConst.isActive = true
-         hConst.priority = UILayoutPriority(50)
-         contentViewm.addSubview(movieImage)
-         contentViewm.addSubview(titleLabel)
-         
-         
-         let stackLanguage = UIStackView()
-         stackLanguage.addArrangedSubview(languageLabel)
-         stackLanguage.addArrangedSubview(languageImage)
-         stackLanguage.axis = .horizontal
-         stackLanguage.translatesAutoresizingMaskIntoConstraints = false
-         
-         let stackDuration = UIStackView()
-         stackDuration.addArrangedSubview(durationLabel)
-         stackDuration.addArrangedSubview(durationImage)
-         stackDuration.axis = .horizontal
-         stackDuration.translatesAutoresizingMaskIntoConstraints = false
-         
-         let stackRating = UIStackView()
-         stackRating.addArrangedSubview(ratingLabel)
-         stackRating.addArrangedSubview(ratingImage)
-         stackRating.axis = .horizontal
-         stackRating.translatesAutoresizingMaskIntoConstraints = false
-         
-         let stackLanDurRa = UIStackView()
-         stackLanDurRa.addArrangedSubview(stackLanguage)
-         stackLanDurRa.addArrangedSubview(stackDuration)
-         stackLanDurRa.addArrangedSubview(stackRating)
-         stackLanDurRa.spacing = 6
-         stackLanDurRa.axis = .horizontal
-         stackLanDurRa.translatesAutoresizingMaskIntoConstraints = false
-         contentViewm.addSubview(stackLanDurRa)
-         
-         let items = ["Details", "Trails","Cast","Shots"]
-         let segmentedControl = UISegmentedControl(items: items)
-         segmentedControl.addTarget(self, action: #selector(suitDidChange(_:)), for: .valueChanged)
-         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-         segmentedControl.tintColor = .blue
- //        contentViewm.addSubview(segmentedControl)
+   
  //        contentViewm.addSubview(genresInfoView)
  //        contentViewm.addSubview(directorsInfoView)
          
@@ -351,10 +228,7 @@ extension MovieDetailedPageViewController: UICollectionViewDataSource, UICollect
              stackLanDurRa.trailingAnchor.constraint(equalTo: contentViewm.trailingAnchor, constant: -20),
              stackLanDurRa.heightAnchor.constraint(equalToConstant: 30),
              
-             segmentedControl.topAnchor.constraint(equalTo: stackLanDurRa.bottomAnchor, constant: 20),
-             segmentedControl.leadingAnchor.constraint(equalTo: contentViewm.leadingAnchor, constant: 20),
-             segmentedControl.trailingAnchor.constraint(equalTo: contentViewm.trailingAnchor, constant: -20),
-             segmentedControl.heightAnchor.constraint(equalToConstant: 50),
+            
              
  //            genresInfoView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 20),
  //            genresInfoView.leadingAnchor.constraint(equalTo: segmentedControl.leadingAnchor),
