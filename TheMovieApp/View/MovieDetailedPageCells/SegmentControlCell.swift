@@ -8,7 +8,7 @@
 import UIKit
 //1
 protocol SegmentControlCellCelectionDelegate: AnyObject {
-    func didSelectSegment(removed: String)
+    func didSelectSegment(selected: String)
 }
 class SegmentControlCell: UICollectionViewCell {
     static let reuseID = "SegmentControlCell"
@@ -48,16 +48,16 @@ class SegmentControlCell: UICollectionViewCell {
     @objc func MovieInfoSegment(_ segmentedControl: UISegmentedControl) {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            delegate?.didSelectSegment(removed: SegmentNames.details.rawValue)
+            delegate?.didSelectSegment(selected: SegmentNames.details.rawValue)
             print("a")
         case 1:
-            delegate?.didSelectSegment(removed: SegmentNames.trailer.rawValue)
+            delegate?.didSelectSegment(selected: SegmentNames.trailer.rawValue)
             print("b")
         case 2:
-            delegate?.didSelectSegment(removed: SegmentNames.cast.rawValue)
+            delegate?.didSelectSegment(selected: SegmentNames.cast.rawValue)
             print("c")
         case 3:
-            delegate?.didSelectSegment(removed: SegmentNames.shots.rawValue)
+            delegate?.didSelectSegment(selected: SegmentNames.shots.rawValue)
             print("d")
         default:
             print("f")

@@ -44,6 +44,7 @@ class MovieDetailedPageViewModel {
     var success: (() -> Void)?
     var error: ((String) -> Void)?
     var items = [MovieDetailedModel]()
+    var allItems = [MovieDetailedModel]()
     var selectedSegment: String?
     
     func getDetailed(id: Int) {
@@ -89,6 +90,7 @@ class MovieDetailedPageViewModel {
                                                  height: 100))
                     }
                 }
+                self?.allItems = self?.items ?? []
                 self?.success?()
             }
         }
@@ -102,6 +104,7 @@ class MovieDetailedPageViewModel {
     }
     
     private func filterItems() {
+        items = allItems
         guard let selectedSegment = selectedSegment else {
             // No selected segment, do nothing
             return
@@ -138,7 +141,6 @@ class MovieDetailedPageViewModel {
     }
 
 }
-
 
 
 
