@@ -8,12 +8,11 @@
 import Foundation
 
 class SearchManager : MovieListUseCase {
-    func getMovieList(searchText: String?, endPoint: Endpoints, completion: @escaping ((Movie?, String?) -> Void)) {
-        let path = Endpoints.searchMovie.rawValue + "?query=\(searchText ?? "")"
+    func getMovieList(searchText: String?, endPoint: MovieEndpoint, completion: @escaping ((Movie?, String?) -> Void)) {
+        let path = MovieEndpoint.searchMovie.rawValue + "?query=\(searchText ?? "")"
         
         NetworkManager.request(
             model: Movie.self,
-            url: path, completion: completion) 
-        
+            url: path, completion: completion)
     }
 }

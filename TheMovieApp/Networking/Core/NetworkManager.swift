@@ -23,6 +23,7 @@ class NetworkManager {
                    parameters: parameters,
                    encoding: encoding,
                    headers: NetworkHelperLinker.header).responseDecodable(of: T.self) { response in
+            print("-----\(NetworkHelperLinker.baseUrl + url)")
             switch response.result {
             case .success(let data):
                 completion(data, nil)

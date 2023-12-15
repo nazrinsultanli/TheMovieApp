@@ -25,7 +25,7 @@ struct People: Codable {
 struct PeopleResult: Codable , TopImageButtonLabelCellProtocol{
     let adult: Bool?
     let gender, id: Int?
-    let knownForDepartment: KnownForDepartment?
+    let knownForDepartment: String?
     let name, originalName: String?
     let popularity: Double?
     let profilePath: String?
@@ -56,9 +56,9 @@ struct KnownFor: Codable {
     let backdropPath: String?
     let id: Int?
     let title: String?
-    let originalLanguage: OriginalLanguage?
+    let originalLanguage: String?
     let originalTitle, overview, posterPath: String?
-    let mediaType: MediaType?
+    let mediaType: String?
     let genreIDS: [Int]?
     let popularity: Double?
     let releaseDate: String?
@@ -88,23 +88,4 @@ struct KnownFor: Codable {
         case firstAirDate = "first_air_date"
         case originCountry = "origin_country"
     }
-}
-
-enum MediaType: String, Codable {
-    case movie = "movie"
-    case tv = "tv"
-}
-
-enum OriginalLanguage: String, Codable {
-    case en = "en"
-    case hi = "hi"
-    case ja = "ja"
-    case ko = "ko"
-    case te = "te"
-    case zh = "zh"
-}
-
-enum KnownForDepartment: String, Codable {
-    case acting = "Acting"
-    case directing = "Directing"
 }

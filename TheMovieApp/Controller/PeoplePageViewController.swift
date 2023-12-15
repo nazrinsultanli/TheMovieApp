@@ -9,6 +9,7 @@ import UIKit
 
 class PeoplePageViewController: UIViewController {
     var viewModel = PeoplePageViewModel()
+    let refreshControl = UIRefreshControl()
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -34,6 +35,8 @@ class PeoplePageViewController: UIViewController {
     
     func configureUI() {
         title = "People"
+        refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
+        collectionView.refreshControl = refreshControl
         view.backgroundColor = .white
         navigationController?.navigationBar.prefersLargeTitles = true
     }
@@ -45,7 +48,12 @@ class PeoplePageViewController: UIViewController {
         }
         viewModel.success =  {
             self.collectionView.reloadData()
+            self.refreshControl.endRefreshing()
         }
+    }
+    @objc func pullToRefresh() {
+        viewModel.items.removeAll()
+        viewModel.getPeopleList()
     }
     
     func setUpConstraints() {
@@ -78,5 +86,7 @@ extension PeoplePageViewController: UICollectionViewDataSource, UICollectionView
         .init(width: collectionView.frame.width/2 - 10, height: 296)
     }
     
-   
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        viewModel.pagination(index: indexPath.item)
+    }
 }

@@ -20,12 +20,12 @@ class HomePageViewModel {
     var error: ((String) -> Void)?
         
     func getItems() {
-        getMovies(endpoint: Endpoints.playing, title: "Now Playing")
-        getMovies(endpoint: Endpoints.popular, title: "Popular")
-        getMovies(endpoint: Endpoints.topRated, title: "Top Rated")
-        getMovies(endpoint: Endpoints.upComing, title: "Up Coming")
+        getMovies(endpoint: MovieEndpoint.playing, title: "Now Playing")
+        getMovies(endpoint: MovieEndpoint.popular, title: "Popular")
+        getMovies(endpoint: MovieEndpoint.topRated, title: "Top Rated")
+        getMovies(endpoint: MovieEndpoint.upComing, title: "Up Coming")
     }
-    func getMovies(endpoint: Endpoints, title: String) {
+    func getMovies(endpoint: MovieEndpoint, title: String) {
         
         manager.getMovieList(searchText: nil, endPoint: endpoint){ data, errorMessage in
             
