@@ -100,11 +100,9 @@ extension HomePageViewController:UICollectionViewDataSource, UICollectionViewDel
 
 
 extension HomePageViewController: HomePageCollectionViewCellDelegate {
-    func didSelectMovie(_ movie: MovieResult) {
-           let movieDetailVC = MovieDetailedPageViewController()
-           // Pass the selected movie to the detail view controller
-        movieDetailVC.selectedMovieID = movie.id ?? 0
-           navigationController?.pushViewController(movieDetailVC, animated: true)
-        //navigationController?.show(movieDetailVC, sender: nil)
+    func didSelectMovie(_ movie: Int) {
+        print(movie)
+        let controller = MovieDetailedCoordinator(navigationController: navigationController ?? UINavigationController(), movieID: movie)
+        controller.start()
        }
 }

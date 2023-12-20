@@ -13,4 +13,5 @@ enum MovieEndpoint: String {
     case topRated = "movie/top_rated"
     case upComing = "movie/upcoming"
     case searchMovie = "search/movie"
+    case detailedMovie = "movie/"
 }

@@ -18,7 +18,7 @@ class GenresHelper {
     func getGenres () {
         NetworkManager.request(
             model: Genres.self,
-            url: Endpoints.genres.rawValue
+            url: GenreEndpoint.genres.rawValue
         ) {[weak self] data, errorMessage in
            
             if let errorMessage {

@@ -27,19 +27,19 @@ class SearchPageViewModel {
         }
     }
     
-    func getGenres () {
-        NetworkManager.request(
-            model: Genres.self,
-            url: Endpoints.genres.rawValue
-        ) {[weak self] data, errorMessage in
-           
-            if let errorMessage {
-                self?.error?(errorMessage)
-            } else if let data {
-                guard let results = data.genres else  {return}
-                self?.genres = results
-                self?.success?()
-            }
-        }
-    }
+//    func getGenres () {
+//        NetworkManager.request(
+//            model: Genres.self,
+//            url: Endpoints.genres.rawValue
+//        ) {[weak self] data, errorMessage in
+//           
+//            if let errorMessage {
+//                self?.error?(errorMessage)
+//            } else if let data {
+//                guard let results = data.genres else  {return}
+//                self?.genres = results
+//                self?.success?()
+//            }
+//        }
+//    }
 }

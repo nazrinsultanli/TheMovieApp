@@ -8,11 +8,20 @@
 import UIKit
 
 class MovieDetailedPageViewController: UIViewController {
-    var selectedMovieID = Int()
+    //var selectedMovieID = Int()
 //    var genres = [String]()
 //    let genreArray = GenresHelper.shared.genres
-    var viewModel = MovieDetailedPageViewModel()
-
+    var viewModel: MovieDetailedPageViewModel
+    
+    init(viewModel: MovieDetailedPageViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -42,12 +51,11 @@ class MovieDetailedPageViewController: UIViewController {
 
     }
     func configureViewModel() {
-        viewModel.getDetailed(id: selectedMovieID)
+        viewModel.getDetailed()
         viewModel.error = {errorMessage in
             print("Error:\(errorMessage)")
         }
         viewModel.success =  {
-            print(self.viewModel.items)
             self.collectionView.reloadData()
         }
     }
@@ -72,32 +80,34 @@ class MovieDetailedPageViewController: UIViewController {
 
 extension MovieDetailedPageViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.items.count
+        viewModel.items.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let item = viewModel.items[indexPath.item]
-        switch item.type {
-        case .media:
+        switch item?.type {
+        case .media(let media):
             guard let  cell = collectionView.dequeueReusableCell(withReuseIdentifier: OneMediaCell.reuseID, for: indexPath) as? OneMediaCell else { return UICollectionViewCell() }
-            cell.configure(item: item.data as! String)
+            cell.configure(item: media ?? "")
             return cell
-        case .title:
+        case .title(let title):
             guard let  cell = collectionView.dequeueReusableCell(withReuseIdentifier: OneTitleCell.reuseID, for: indexPath) as? OneTitleCell else { return UICollectionViewCell() }
-            cell.configure(item: item.data as! String)
+            cell.configure(item: title ?? "")
             return cell
             
-        case .infoThree:
+        case .infoThree(let info):
             guard let   cell = collectionView.dequeueReusableCell(withReuseIdentifier: InfoThreeLabelImageCell.reuseID, for: indexPath) as? InfoThreeLabelImageCell else { return UICollectionViewCell() }
-            cell.configure(info: item.data as! InfoThreeModel)
+            if let info {
+                cell.configure(info: info)
+            }
             return cell
         case .segment:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SegmentControlCell.reuseID, for: indexPath) as? SegmentControlCell else { return UICollectionViewCell() }
             cell.delegate = self
             return cell
-        case .details:
+        case .details (let data):
             guard let   cell = collectionView.dequeueReusableCell(withReuseIdentifier: SegmentDetailCell.reuseID, for: indexPath) as? SegmentDetailCell else { return UICollectionViewCell() }
-            cell.configure(item: item.data as! SegmentDetailsModel)
+            cell.configure(item: data!)
             return cell
         default:
               guard let  cell = collectionView.dequeueReusableCell(withReuseIdentifier: OneMediaCell.reuseID, for: indexPath) as? OneMediaCell else { return UICollectionViewCell() }
@@ -105,14 +115,14 @@ extension MovieDetailedPageViewController: UICollectionViewDataSource, UICollect
         }
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: collectionView.frame.width, height: viewModel.items[indexPath.item].height)
+        return .init(width: collectionView.frame.width, height: viewModel.items[indexPath.item].height ?? 0)
         
     }
     
 }
 extension MovieDetailedPageViewController: SegmentControlCellCelectionDelegate {
     func didSelectSegment(selected: String) {
-        viewModel.didSelectSegment(selected)
+        //viewModel.didSelectSegment(selected)
     }
     
 }

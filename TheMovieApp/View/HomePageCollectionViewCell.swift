@@ -8,7 +8,7 @@
 import UIKit
 //1
 protocol HomePageCollectionViewCellDelegate: AnyObject {
-    func didSelectMovie(_ movie: MovieResult)
+    func didSelectMovie(_ movie: Int)
 }
 
 class HomePageCollectionViewCell: UICollectionViewCell {
@@ -35,6 +35,7 @@ class HomePageCollectionViewCell: UICollectionViewCell {
         button.setTitle("see all>", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 12, weight: .bold)
         button.setTitleColor(.blue, for: .normal)
+        //button.addTarget(self, action: #selector(seeAllButtonClicked), for: .touchUpInside)
         return button
     }()
     
@@ -90,6 +91,10 @@ class HomePageCollectionViewCell: UICollectionViewCell {
             collectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
         ])
     }
+    
+    @objc func seeAllButtonClicked(sender:UIButton!) {
+        
+    }
 }
 
 extension HomePageCollectionViewCell:  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -124,7 +129,8 @@ extension HomePageCollectionViewCell:  UICollectionViewDelegate, UICollectionVie
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //3
-            let selectedMovie = movies[indexPath.row]
+        if let selectedMovie = movies[indexPath.row].id {
             delegate?.didSelectMovie(selectedMovie)
+        }
         }
 }
