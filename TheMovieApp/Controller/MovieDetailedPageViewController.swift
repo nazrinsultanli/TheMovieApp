@@ -80,12 +80,12 @@ class MovieDetailedPageViewController: UIViewController {
 
 extension MovieDetailedPageViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.items.count ?? 0
+        viewModel.items.count 
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let item = viewModel.items[indexPath.item]
-        switch item?.type {
+        switch item.type {
         case .media(let media):
             guard let  cell = collectionView.dequeueReusableCell(withReuseIdentifier: OneMediaCell.reuseID, for: indexPath) as? OneMediaCell else { return UICollectionViewCell() }
             cell.configure(item: media ?? "")
@@ -115,7 +115,7 @@ extension MovieDetailedPageViewController: UICollectionViewDataSource, UICollect
         }
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: collectionView.frame.width, height: viewModel.items[indexPath.item].height ?? 0)
+        return .init(width: collectionView.frame.width, height: viewModel.items[indexPath.item].height )
         
     }
     

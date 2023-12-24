@@ -8,7 +8,8 @@
 import Foundation
 
 class SearchManager : MovieListUseCase {
-    func getMovieList(searchText: String?, endPoint: MovieEndpoint, completion: @escaping ((Movie?, String?) -> Void)) {
+    func getMovieList(pageNumber: Int, searchText: String?, endPoint: MovieEndpoint, completion: @escaping ((Movie?, String?) -> Void)) {
+        
         let path = MovieEndpoint.searchMovie.rawValue + "?query=\(searchText ?? "")"
         
         NetworkManager.request(

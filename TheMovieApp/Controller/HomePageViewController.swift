@@ -83,7 +83,7 @@ extension HomePageViewController:UICollectionViewDataSource, UICollectionViewDel
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomePageCollectionViewCell.reuseID, for: indexPath) as! HomePageCollectionViewCell
         let item = viewModel.items[indexPath.row]
         cell.delegate = self
-        cell.configure(title: item.title, movies: item.result)
+        cell.configure(title: item.title, movies: item.result, endpoint: item.endPoint)
         return cell
     }
     
@@ -100,6 +100,11 @@ extension HomePageViewController:UICollectionViewDataSource, UICollectionViewDel
 
 
 extension HomePageViewController: HomePageCollectionViewCellDelegate {
+    func didSelectSeeAll(endpoint: MovieEndpoint) {
+        let controller = SeeAllCoordinator(navigationController: navigationController ?? UINavigationController(), endpoint: endpoint)
+        controller.start()
+    }
+    
     func didSelectMovie(_ movie: Int) {
         print(movie)
         let controller = MovieDetailedCoordinator(navigationController: navigationController ?? UINavigationController(), movieID: movie)

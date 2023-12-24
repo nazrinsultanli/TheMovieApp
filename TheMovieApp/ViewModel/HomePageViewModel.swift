@@ -9,6 +9,7 @@ import Foundation
 
 struct homeModel {
     let title: String
+    let endPoint: MovieEndpoint
     let result: [MovieResult]
 }
 
@@ -33,7 +34,7 @@ class HomePageViewModel {
                 self.error?(errorMessage)
             } else if let data {
                 guard let results = data.results else  {return}
-                self.items.append(.init(title: title, result: results))
+                self.items.append(.init(title: title, endPoint: endpoint, result: results))
                 self.success?()
             }
         }

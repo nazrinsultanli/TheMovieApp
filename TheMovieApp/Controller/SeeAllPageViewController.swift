@@ -8,7 +8,17 @@
 import UIKit
 
 class SeeAllPageViewController: UIViewController {
-    var viewModel = HomePageViewModel()
+    var viewModel: SeeAllPageViewModel
+    
+    init(viewModel: SeeAllPageViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     let refreshControl = UIRefreshControl()
     
     private lazy var collectionView: UICollectionView = {
@@ -34,7 +44,7 @@ class SeeAllPageViewController: UIViewController {
     }
     
     func configureUI() {
-        title = "People"
+        title = viewModel.endPoint?.rawValue
         refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
         collectionView.refreshControl = refreshControl
         view.backgroundColor = .white
@@ -42,18 +52,19 @@ class SeeAllPageViewController: UIViewController {
     }
     
     func configureViewModel() {
-//        viewModel.getPeopleList()
-//        viewModel.error = {errorMessage in
-//            print("Error:\(errorMessage)")
-//        }
-//        viewModel.success =  {
-//            self.collectionView.reloadData()
-//            self.refreshControl.endRefreshing()
-//        }
+        viewModel.getSpecificMovie(endpoint: viewModel.endPoint ?? .popular)
+        
+        viewModel.error = {errorMessage in
+            print("Error:\(errorMessage)")
+        }
+        viewModel.success =  {
+            self.collectionView.reloadData()
+            self.refreshControl.endRefreshing()
+        }
     }
     @objc func pullToRefresh() {
-//        viewModel.items.removeAll()
-//        viewModel.getPeopleList()
+        viewModel.movies.removeAll()
+        viewModel.getSpecificMovie(endpoint: viewModel.endPoint ?? .popular)
     }
     
     func setUpConstraints() {
@@ -71,12 +82,12 @@ class SeeAllPageViewController: UIViewController {
 
 extension SeeAllPageViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.items.count
+        viewModel.movies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TopImageButtonLabelCell.reuseID, for: indexPath) as! TopImageButtonLabelCell
-//        cell.configure(item: viewModel.items[indexPath.item])
+        cell.configure(item: viewModel.movies[indexPath.item])
         return cell
     }
     
@@ -87,6 +98,6 @@ extension SeeAllPageViewController: UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        viewModel.pagination(index: indexPath.item)
+        viewModel.pagination(index: indexPath.item)
     }
 }

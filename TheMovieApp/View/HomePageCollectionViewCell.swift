@@ -9,7 +9,10 @@ import UIKit
 //1
 protocol HomePageCollectionViewCellDelegate: AnyObject {
     func didSelectMovie(_ movie: Int)
+    func didSelectSeeAll(endpoint: MovieEndpoint)
 }
+
+
 
 class HomePageCollectionViewCell: UICollectionViewCell {
     //2
@@ -17,6 +20,7 @@ class HomePageCollectionViewCell: UICollectionViewCell {
     
     static let reuseID = "HomePageCollectionViewCell"
     var movies = [MovieResult]()
+    var endPoint: MovieEndpoint?
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -35,7 +39,6 @@ class HomePageCollectionViewCell: UICollectionViewCell {
         button.setTitle("see all>", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 12, weight: .bold)
         button.setTitleColor(.blue, for: .normal)
-        //button.addTarget(self, action: #selector(seeAllButtonClicked), for: .touchUpInside)
         return button
     }()
     
@@ -57,15 +60,21 @@ class HomePageCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpCell()
+        seeAllButton.addTarget(self, action: #selector(seeAllButtonClicked), for: .touchUpInside)
+    }
+    
+    @objc func seeAllButtonClicked(_ sender: UIButton?) {
+        delegate?.didSelectSeeAll(endpoint: endPoint ?? .popular)
     }
     
     required init?(coder: NSCoder) {
         fatalError("Init(coder:) has not been implemented")
     }
     
-    func configure(title: String, movies: [MovieResult]) {
+    func configure(title: String, movies: [MovieResult], endpoint: MovieEndpoint) {
         titleLabel.text = title
         self.movies = movies
+        self.endPoint = endpoint
         collectionView.reloadData()
     }
     private func setUpCell() {
@@ -90,11 +99,10 @@ class HomePageCollectionViewCell: UICollectionViewCell {
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
         ])
-    }
-    
-    @objc func seeAllButtonClicked(sender:UIButton!) {
         
     }
+    
+   
 }
 
 extension HomePageCollectionViewCell:  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
