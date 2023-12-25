@@ -16,7 +16,7 @@ class SearchPageViewModel {
     
     let manager = SearchManager()
     func getSearchedMovies(searchText: String) {
-        manager.getMovieList(searchText: searchText, endPoint: .searchMovie) { [weak self] data, errorMessage in           
+        manager.getMovieList(pageNumber: 0, searchText: searchText, endPoint: .searchMovie) { [weak self] data, errorMessage in           
             if let errorMessage {
                 self?.error?(errorMessage)
             } else if let data {

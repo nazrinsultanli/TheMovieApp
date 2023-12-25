@@ -28,7 +28,7 @@ class HomePageViewModel {
     }
     func getMovies(endpoint: MovieEndpoint, title: String) {
         
-        manager.getMovieList(searchText: nil, endPoint: endpoint){ data, errorMessage in
+        manager.getMovieList(pageNumber: 0, searchText: nil, endPoint: endpoint){ data, errorMessage in
             
             if let errorMessage {
                 self.error?(errorMessage)

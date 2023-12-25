@@ -18,7 +18,8 @@ class SeeAllPageViewModel {
         self.endPoint = endPoint
     }
     func getSpecificMovie(endpoint: MovieEndpoint) {
-        manager.getMovieList(searchText: nil,
+        manager.getMovieList(pageNumber: (specificMovie?.page ?? 0) + 1,
+                             searchText: nil,
                              endPoint: endpoint){ data, errorMessage in
             if let errorMessage {
                 self.error?(errorMessage)
@@ -31,7 +32,7 @@ class SeeAllPageViewModel {
     }
     
     func pagination(index: Int) {
-        if index == movi.count - 1 && (peopleData?.page ?? 0 <= peopleData?.totalPages ?? 0) {
+        if index == movies.count - 1 && (specificMovie?.page ?? 0 <= specificMovie?.totalPages ?? 0) {
             getSpecificMovie(endpoint: endPoint ?? .playing)
         }
     }

@@ -165,6 +165,7 @@
 				1066BA822B236A010004F391 /* PeoplePageViewModel.swift */,
 				1045563F2B26065600E7E883 /* SearchPageViewModel.swift */,
 				108961592B2A5376005D9ED1 /* MovieDetailedPageViewModel.swift */,
+				100B05102B38992400BA96E5 /* SeeAllPageViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -211,7 +212,6 @@
 				10A4DD7A2B1E30940009254C /* TopImageButtonLabelCell.swift */,
 				1045563D2B24701F00E7E883 /* SearchViewTableViewCell.swift */,
 				103B80A02B278B850081D1B8 /* HorizontalLabelsCollectionCell.swift */,
-				100B05102B38992400BA96E5 /* SeeAllPageViewModel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
