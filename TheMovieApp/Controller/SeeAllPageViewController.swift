@@ -100,4 +100,8 @@ extension SeeAllPageViewController: UICollectionViewDataSource, UICollectionView
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         viewModel.pagination(index: indexPath.item)
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let controller = MovieDetailedCoordinator(navigationController: navigationController ?? UINavigationController(), movieID: viewModel.movies[indexPath.item].id ?? 0)
+        controller.start()
+    }
 }
