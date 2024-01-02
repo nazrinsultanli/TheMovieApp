@@ -1,15 +1,15 @@
 //
-//  PeoplePageViewController.swift
+//  PeoplesMoviesPageViewController.swift
 //  TheMovieApp
 //
-//  Created by Nazrin Sultanlı on 08.12.23.
+//  Created by Nazrin Sultanlı on 02.01.24.
 //
 
 import UIKit
 
-class PeoplePageViewController: UIViewController {
-    var viewModel = PeoplePageViewModel()
-    let refreshControl = UIRefreshControl()
+class PeoplesMoviesPageViewController: UIViewController {
+    var viewModel = PeoplesMoviesPageViewModel()
+//    let refreshControl = UIRefreshControl()
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -34,28 +34,28 @@ class PeoplePageViewController: UIViewController {
     }
     
     func configureUI() {
-        title = "People"
-        refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
-        collectionView.refreshControl = refreshControl
+        title = "Peoplemovies"
+//        refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
+//        collectionView.refreshControl = refreshControl
         view.backgroundColor = .white
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     func configureViewModel() {
-        viewModel.getPeopleList()
+        viewModel.getPeopleMovieCredits()
         viewModel.error = {errorMessage in
             print("Error:\(errorMessage)")
         }
         viewModel.success =  {
             self.collectionView.reloadData()
-            self.refreshControl.endRefreshing()
+//            self.refreshControl.endRefreshing()
         }
     }
-    @objc func pullToRefresh() {
-        viewModel.items.removeAll()
-        viewModel.getPeopleList()
-    }
-    
+//    @objc func pullToRefresh() {
+//        viewModel.items.removeAll()
+//        viewModel.getPeopleList()
+//    }
+//    
     func setUpConstraints() {
         view.addSubview(collectionView)
         
@@ -69,7 +69,7 @@ class PeoplePageViewController: UIViewController {
 
 
 
-extension PeoplePageViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension PeoplesMoviesPageViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel.items.count
     }
@@ -86,12 +86,7 @@ extension PeoplePageViewController: UICollectionViewDataSource, UICollectionView
         .init(width: collectionView.frame.width/2 - 10, height: 296)
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let controller = PeoplesMoviesPageViewController()
-        controller.viewModel.selectedPeople = viewModel.items[indexPath.item].id ?? 0
-        navigationController?.show(controller, sender: nil)
-    }
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        viewModel.pagination(index: indexPath.item)
-    }
+//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        viewModel.pagination(index: indexPath.item)
+//    }
 }

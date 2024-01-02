@@ -8,4 +8,5 @@
 import Foundation
 enum PeopleEndpoint: String {
     case people = "person/popular"
+    case peopleMovieCredits = "person/"
 }
