@@ -35,6 +35,12 @@
 		104556402B26065600E7E883 /* SearchPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1045563F2B26065600E7E883 /* SearchPageViewModel.swift */; };
 		105F05842B1B7E8B00A78132 /* HomePageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105F05832B1B7E8B00A78132 /* HomePageViewModel.swift */; };
 		105F05862B1B809E00A78132 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105F05852B1B809E00A78132 /* HomePageViewController.swift */; };
+		1064D5BE2B481EC40045931A /* LoginPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1064D5BD2B481EC40045931A /* LoginPageViewController.swift */; };
+		1064D5C02B481EE30045931A /* LoginAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1064D5BF2B481EE30045931A /* LoginAdapter.swift */; };
+		1064D5C32B4825B20045931A /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 1064D5C22B4825B20045931A /* GoogleSignIn */; };
+		1064D5C52B4825B20045931A /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1064D5C42B4825B20045931A /* GoogleSignInSwift */; };
+		1064D5C72B4827290045931A /* DataBaseAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1064D5C62B4827290045931A /* DataBaseAdapter.swift */; };
+		1064D5CD2B48283E0045931A /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1064D5CC2B48283E0045931A /* KeychainSwift */; };
 		1066BA812B2369E20004F391 /* PeoplePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1066BA802B2369E20004F391 /* PeoplePageViewController.swift */; };
 		1066BA832B236A010004F391 /* PeoplePageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1066BA822B236A010004F391 /* PeoplePageViewModel.swift */; };
 		1066BA852B236B660004F391 /* People.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1066BA842B236B660004F391 /* People.swift */; };
@@ -92,6 +98,9 @@
 		1045563F2B26065600E7E883 /* SearchPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageViewModel.swift; sourceTree = "<group>"; };
 		105F05832B1B7E8B00A78132 /* HomePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewModel.swift; sourceTree = "<group>"; };
 		105F05852B1B809E00A78132 /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
+		1064D5BD2B481EC40045931A /* LoginPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPageViewController.swift; sourceTree = "<group>"; };
+		1064D5BF2B481EE30045931A /* LoginAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAdapter.swift; sourceTree = "<group>"; };
+		1064D5C62B4827290045931A /* DataBaseAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseAdapter.swift; sourceTree = "<group>"; };
 		1066BA802B2369E20004F391 /* PeoplePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeoplePageViewController.swift; sourceTree = "<group>"; };
 		1066BA822B236A010004F391 /* PeoplePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeoplePageViewModel.swift; sourceTree = "<group>"; };
 		1066BA842B236B660004F391 /* People.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = People.swift; sourceTree = "<group>"; };
@@ -125,6 +134,9 @@
 			files = (
 				10F4D40A2B20CF0900841103 /* Kingfisher in Frameworks */,
 				1008F0FC2B1B2D410049A3A8 /* Alamofire in Frameworks */,
+				1064D5CD2B48283E0045931A /* KeychainSwift in Frameworks */,
+				1064D5C32B4825B20045931A /* GoogleSignIn in Frameworks */,
+				1064D5C52B4825B20045931A /* GoogleSignInSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,6 +223,7 @@
 				103BAD362B28A1AB003B0FA5 /* MovieDetailedPageViewController.swift */,
 				102410FC2B320CD5002791A3 /* SeeAllPageViewController.swift */,
 				1002563E2B4453AC0034FC3E /* PeoplesMoviesPageViewController.swift */,
+				1064D5BD2B481EC40045931A /* LoginPageViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -236,6 +249,8 @@
 				100054D52B334E710054A4E3 /* Coordinator.swift */,
 				100B050E2B3897F500BA96E5 /* SeeAllCoordinator.swift */,
 				100054D72B334F0B0054A4E3 /* MovieDetailedCoordinator.swift */,
+				1064D5BF2B481EE30045931A /* LoginAdapter.swift */,
+				1064D5C62B4827290045931A /* DataBaseAdapter.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -313,6 +328,9 @@
 			packageProductDependencies = (
 				1008F0FB2B1B2D410049A3A8 /* Alamofire */,
 				10F4D4092B20CF0900841103 /* Kingfisher */,
+				1064D5C22B4825B20045931A /* GoogleSignIn */,
+				1064D5C42B4825B20045931A /* GoogleSignInSwift */,
+				1064D5CC2B48283E0045931A /* KeychainSwift */,
 			);
 			productName = TheMovieApp;
 			productReference = 1008F0DB2B1B287B0049A3A8 /* TheMovieApp.app */;
@@ -345,6 +363,8 @@
 			packageReferences = (
 				1008F0FA2B1B2D410049A3A8 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				10F4D4082B20CF0900841103 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				1064D5C12B4825B20045931A /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				1064D5CB2B48283E0045931A /* XCRemoteSwiftPackageReference "keychain-swift" */,
 			);
 			productRefGroup = 1008F0DC2B1B287B0049A3A8 /* Products */;
 			projectDirPath = "";
@@ -374,6 +394,7 @@
 			files = (
 				10DDDA722B2B93A7007AB35A /* SegmentDetailCell.swift in Sources */,
 				103B80A12B278B850081D1B8 /* HorizontalLabelsCollectionCell.swift in Sources */,
+				1064D5C02B481EE30045931A /* LoginAdapter.swift in Sources */,
 				10AF61C32B28164000392EA3 /* GenresHelper.swift in Sources */,
 				1066BA832B236A010004F391 /* PeoplePageViewModel.swift in Sources */,
 				1066BA812B2369E20004F391 /* PeoplePageViewController.swift in Sources */,
@@ -405,9 +426,11 @@
 				100B05112B38992400BA96E5 /* SeeAllPageViewModel.swift in Sources */,
 				100256432B445CF30034FC3E /* PeopleMoviesUseCase.swift in Sources */,
 				108961522B2A0938005D9ED1 /* HomePageManager.swift in Sources */,
+				1064D5BE2B481EC40045931A /* LoginPageViewController.swift in Sources */,
 				104556402B26065600E7E883 /* SearchPageViewModel.swift in Sources */,
 				1008F0E92B1B287B0049A3A8 /* TheMovieApp.xcdatamodeld in Sources */,
 				108961582B2A5212005D9ED1 /* MovieDetailed.swift in Sources */,
+				1064D5C72B4827290045931A /* DataBaseAdapter.swift in Sources */,
 				1008F0E12B1B287B0049A3A8 /* SceneDelegate.swift in Sources */,
 				100256412B4457B70034FC3E /* PeopleMovieCredits.swift in Sources */,
 				103BAD372B28A1AB003B0FA5 /* MovieDetailedPageViewController.swift in Sources */,
@@ -643,6 +666,22 @@
 				minimumVersion = 5.8.1;
 			};
 		};
+		1064D5C12B4825B20045931A /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+		1064D5CB2B48283E0045931A /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 20.0.0;
+			};
+		};
 		10F4D4082B20CF0900841103 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -658,6 +697,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1008F0FA2B1B2D410049A3A8 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		1064D5C22B4825B20045931A /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1064D5C12B4825B20045931A /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		1064D5C42B4825B20045931A /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1064D5C12B4825B20045931A /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+		1064D5CC2B48283E0045931A /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1064D5CB2B48283E0045931A /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
 		};
 		10F4D4092B20CF0900841103 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
