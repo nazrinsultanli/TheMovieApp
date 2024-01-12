@@ -17,6 +17,7 @@ class SeeAllPageViewModel {
     init(endPoint: MovieEndpoint) {
         self.endPoint = endPoint
     }
+    
     func getSpecificMovie(endpoint: MovieEndpoint) {
         manager.getMovieList(pageNumber: (specificMovie?.page ?? 0) + 1,
                              searchText: nil,
@@ -24,8 +25,10 @@ class SeeAllPageViewModel {
             if let errorMessage {
                 self.error?(errorMessage)
             } else if let data {
-                guard let result = data.results else {return}
-                self.movies = result
+//                guard let result = data.results else { return }
+                self.specificMovie = data
+                //self.movies = result
+                self.movies.append(contentsOf: data.results ?? [])
                 self.success?()
             }
         }

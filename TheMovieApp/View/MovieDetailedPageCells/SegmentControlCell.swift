@@ -8,12 +8,17 @@
 import UIKit
 //1
 protocol SegmentControlCellCelectionDelegate: AnyObject {
-    func didSelectSegment(selected: String)
+    func didSelectSegment(item: SegmentNames)
 }
 class SegmentControlCell: UICollectionViewCell {
     static let reuseID = "SegmentControlCell"
     //2
     weak var delegate: SegmentControlCellCelectionDelegate?
+    
+    let items = [SegmentNames.details,
+                 SegmentNames.trailer,
+                 SegmentNames.cast,
+                 SegmentNames.shots]
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,12 +31,8 @@ class SegmentControlCell: UICollectionViewCell {
     }
     
     private func setUpCell() {
-        
-        let items = [SegmentNames.details.rawValue,
-                     SegmentNames.trailer.rawValue,
-                     SegmentNames.cast.rawValue,
-                     SegmentNames.shots.rawValue]
-        let segmentedControl = UISegmentedControl(items: items)
+        let segmentedControl = UISegmentedControl(items: items.map({ $0.rawValue }))
+        segmentedControl.selectedSegmentIndex = 0
         segmentedControl.addTarget(self, action: #selector(MovieInfoSegment(_:)), for: .valueChanged)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.tintColor = .blue
@@ -46,21 +47,23 @@ class SegmentControlCell: UICollectionViewCell {
     }
     //3
     @objc func MovieInfoSegment(_ segmentedControl: UISegmentedControl) {
-        switch segmentedControl.selectedSegmentIndex {
-        case 0:
-            delegate?.didSelectSegment(selected: SegmentNames.details.rawValue)
-            print("a")
-        case 1:
-            delegate?.didSelectSegment(selected: SegmentNames.trailer.rawValue)
-            print("b")
-        case 2:
-            delegate?.didSelectSegment(selected: SegmentNames.cast.rawValue)
-            print("c")
-        case 3:
-            delegate?.didSelectSegment(selected: SegmentNames.shots.rawValue)
-            print("d")
-        default:
-            print("f")
-        }
+//        delegate?.didSelectSegment(index: segmentedControl.selectedSegmentIndex)
+        delegate?.didSelectSegment(item: items[segmentedControl.selectedSegmentIndex])
+//        switch segmentedControl.selectedSegmentIndex {
+//        case 0:
+//            delegate?.didSelectSegment(selected: SegmentNames.details.rawValue)
+//            print("a")
+//        case 1:
+//            delegate?.didSelectSegment(selected: SegmentNames.trailer.rawValue)
+//            print("b")
+//        case 2:
+//            delegate?.didSelectSegment(selected: SegmentNames.cast.rawValue)
+//            print("c")
+//        case 3:
+//            delegate?.didSelectSegment(selected: SegmentNames.shots.rawValue)
+//            print("d")
+//        default:
+//            print("f")
+//        }
     }
 }

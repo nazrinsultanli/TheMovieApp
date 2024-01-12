@@ -112,6 +112,7 @@ extension SearchFromHomeViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 160
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let controller = MovieDetailedCoordinator(navigationController: navigationController ?? UINavigationController(), movieID: viewModel.items[indexPath.row].id ?? 0)
         controller.start()

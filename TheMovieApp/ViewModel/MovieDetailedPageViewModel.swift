@@ -6,8 +6,6 @@
 //
 import Foundation
 
-
-
 enum MovieDetailItemType {
     case media(String?)
     case title(String?)
@@ -25,6 +23,7 @@ enum SegmentNames: String , CaseIterable {
     case cast = "Cast"
     case shots = "Shots"
 }
+
 struct MovieDetailedModel {
     let type: MovieDetailItemType
 
@@ -36,6 +35,7 @@ struct InfoThreeModel {
     let releaseData: String
     let imdbRating: Double
 }
+
 struct SegmentDetailsModel {
     let genre: [Genre]
     let status: String
@@ -63,7 +63,7 @@ class MovieDetailedPageViewModel {
                     self?.items.append(.init(type: .media (media),
                                              height: 400))
                 }
-                if let title = data.title{
+                if let title = data.title {
                     self?.items.append(.init(type: .title(title),
                                              height: 50))
                 }
@@ -90,6 +90,13 @@ class MovieDetailedPageViewModel {
                 self?.success?()
             }
         }
+    }
+    
+    func didSelectSegment(segment: SegmentNames) {
+//        let index = allItems.firstIndex(where: { $0.type == .segment })
+//        if let index = index {
+//            allItems.remove(at: index)
+//        }
     }
     
     

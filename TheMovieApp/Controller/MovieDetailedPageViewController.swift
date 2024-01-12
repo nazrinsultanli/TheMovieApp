@@ -121,10 +121,9 @@ extension MovieDetailedPageViewController: UICollectionViewDataSource, UICollect
     
 }
 extension MovieDetailedPageViewController: SegmentControlCellCelectionDelegate {
-    func didSelectSegment(selected: String) {
-        //viewModel.didSelectSegment(selected)
+    func didSelectSegment(item: SegmentNames) {
+        viewModel.didSelectSegment(segment: item)
     }
-    
 }
 
 
